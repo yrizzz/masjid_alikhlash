@@ -19,7 +19,7 @@
         <div class="relative z-10 mx-auto flex flex-1 w-full max-w-5xl flex-col items-center justify-center px-4 pt-20 sm:pt-24 pb-4 text-center sm:px-6 lg:px-8">
 
             {{-- Arabic verse ornament --}}
-            <div class="mb-3 sm:mb-4 max-w-xl mx-auto space-y-0.5">
+            <div class="mb-3 sm:mb-4 max-w-xl mx-auto space-y-0.5 hero-animate">
                 <p class="font-amiri text-xl sm:text-2xl lg:text-3xl tracking-wide text-amber-200/95 drop-shadow-md">
                     إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
                 </p>
@@ -29,7 +29,7 @@
             </div>
 
             {{-- Hijri date badge & Live Prayer Countdown Pill --}}
-            <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-4 hero-animate hero-delay-1">
                 <div class="inline-flex items-center gap-2 rounded-full bg-stone-950/80 border border-amber-400/40 px-3.5 py-1 text-[0.7rem] sm:text-xs font-semibold text-amber-200 shadow-xl backdrop-blur-xl">
                     <span class="relative flex size-2">
                         <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
@@ -51,19 +51,21 @@
             </div>
 
             {{-- Mosque name & tagline --}}
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
-                Masjid Jami’<br />
-                <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
-                    Al-Ikhlash
-                </span>
-            </h1>
-            <p class="mt-2.5 max-w-xl text-xs sm:text-sm lg:text-base text-stone-200/90 font-medium leading-relaxed">
-                Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
-                <span class="text-amber-400 font-bold">Kelurahan Kerten, Laweyan, Surakarta.</span>
-            </p>
+            <div class="hero-animate hero-delay-2">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
+                    Masjid Jami’<br />
+                    <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
+                        Al-Ikhlash
+                    </span>
+                </h1>
+                <p class="mt-2.5 max-w-xl text-xs sm:text-sm lg:text-base text-stone-200/90 font-medium leading-relaxed">
+                    Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
+                    <span class="text-amber-400 font-bold">Kelurahan Kerten, Laweyan, Surakarta.</span>
+                </p>
+            </div>
 
             {{-- 4 Stat Cards Grid --}}
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3 w-full max-w-2xl mt-4 sm:mt-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3 w-full max-w-2xl mt-4 sm:mt-6 hero-animate hero-delay-3">
                 <div class="rounded-xl sm:rounded-2xl border border-white/15 bg-stone-950/65 p-2 sm:p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
                     <div class="flex items-center justify-center gap-1 text-amber-400 mb-0.5">
                         <i data-lucide="users" class="size-3 sm:size-3.5 shrink-0"></i>
@@ -98,7 +100,7 @@
             </div>
 
             {{-- Action Pill Buttons Row --}}
-            <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 mt-4 sm:mt-6">
+            <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 mt-4 sm:mt-6 hero-animate hero-delay-4">
                 <a href="{{ route('donasi') }}" wire:navigate
                    class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-4 sm:px-6 py-2 sm:py-3 text-[0.75rem] sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
                     <i data-lucide="hand-heart" class="size-3.5 sm:size-4"></i>
@@ -145,7 +147,7 @@
         </div>
 
         {{-- ═══ PRAYER TIME FLOATING BAR — EXACT MATCH BOTTOM BAR ═══ --}}
-        <div class="relative z-20 w-full border-t border-amber-500/20 bg-stone-950/90 backdrop-blur-2xl py-3 shadow-2xl">
+        <div class="relative z-20 w-full border-t border-b border-amber-500/20 bg-stone-950/85 backdrop-blur-2xl py-3 shadow-2xl hero-animate hero-delay-5">
             <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
 
@@ -164,7 +166,7 @@
                     <div class="grid grid-cols-5 gap-1 sm:gap-2 w-full flex-1 py-1 px-1 sm:px-2">
                         @foreach ($prayer['times'] as $key => $time)
                             @php $isActive = $prayer['current'] === $key; @endphp
-                            <div class="rounded-xl px-1 sm:px-3 py-1.5 sm:py-2 text-center transition-all {{ $isActive ? 'bg-amber-500/20 border border-amber-500/40 shadow-lg' : 'bg-white/5 border border-transparent' }}">
+                            <div class="rounded-xl px-1 sm:px-3 py-1.5 sm:py-2 text-center transition-all {{ $isActive ? 'bg-amber-500/25 border border-amber-500/50 shadow-lg' : 'bg-white/5 border border-white/5' }}">
                                 <p class="text-[0.55rem] sm:text-[0.65rem] font-extrabold uppercase tracking-tight sm:tracking-wider {{ $isActive ? 'text-amber-300' : 'text-stone-400' }}">
                                     {{ \App\Services\PrayerTimeService::PRAYERS[$key] }}
                                 </p>
@@ -179,7 +181,8 @@
                     </div>
 
                     {{-- Right Countdown Box with Dynamic Ticking Timer --}}
-                    <div x-data="countdown({{ $prayer['seconds_left'] }})" class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-600/10 to-transparent border border-amber-500/40 px-4 py-2 shrink-0 w-full lg:w-auto justify-between lg:justify-start shadow-inner">
+                    <div x-data="countdown({{ $prayer['seconds_left'] }})"
+                         class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-600/10 to-transparent border border-amber-500/40 px-4 py-2 shrink-0 w-full lg:w-auto justify-between lg:justify-start shadow-inner">
                         <div>
                             <p class="text-[0.65rem] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                                 <span class="size-1.5 rounded-full bg-amber-400 animate-ping"></span>
@@ -200,7 +203,7 @@
 
 
     {{-- ══════════════ AKSES CEPAT LAYANAN ISLAMI ══════════════ --}}
-    <section class="border-b border-emerald-500/10 bg-card/60 backdrop-blur-md py-8">
+    <section class="border-b border-stone-200 dark:border-amber-800/50 bg-stone-100/90 dark:bg-[#1a1411]/95 backdrop-blur-md py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
                 @foreach ([
@@ -210,9 +213,10 @@
                     ['Kajian & Live', 'video', 'kajian', 'Majelis Ilmu'],
                     ['Booking Ruangan', 'building-2', 'booking', 'Fasilitas Masjid'],
                     ['UMKM Jamaah', 'store', 'umkm', 'Ekonomi Umat'],
-                ] as [$label, $icon, $r, $sub])
+                ] as $idx => [$label, $icon, $r, $sub])
                     <a href="{{ route($r) }}" wire:navigate
-                       class="group flex flex-col items-center gap-2 rounded-2xl border border-amber-700/20 bg-background p-4 text-center card-transition hover:border-amber-500/50">
+                       data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}"
+                       class="group flex flex-col items-center gap-2 rounded-2xl bg-white dark:bg-[#251e18] p-4 text-center card-transition hover:bg-amber-500/10 dark:hover:bg-[#2e251e] shadow-sm hover:shadow-md border border-stone-200/80 dark:border-amber-900/30">
                         <span class="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-amber-600/15 via-stone-500/10 to-amber-900/20 text-amber-700 dark:text-amber-400 group-hover:bg-gradient-to-br group-hover:from-amber-600 group-hover:to-amber-800 group-hover:text-white transition-all shadow-sm">
                             <i data-lucide="{{ $icon }}" class="size-6"></i>
                         </span>
@@ -227,12 +231,12 @@
     </section>
 
     {{-- ══════════════ KAJIAN & KHUTBAH JUMAT ══════════════ --}}
-    <section class="relative w-full border-y border-stone-200/80 dark:border-stone-800/80 bg-stone-50/80 dark:bg-stone-900/40 py-10 sm:py-16 bg-islamic-pattern">
+    <section class="relative w-full border-b border-stone-200 dark:border-amber-800/50 bg-stone-50/90 dark:bg-[#150f0c]/90 py-10 sm:py-16 bg-islamic-pattern">
         <div class="mx-auto max-w-7xl w-full min-w-0 px-4 sm:px-6 lg:px-8">
             <div class="grid gap-8 lg:grid-cols-3 w-full min-w-0">
                 {{-- Kiri: Kajian Mendatang --}}
                 <div class="lg:col-span-2 w-full min-w-0 space-y-6">
-                    <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+                    <div class="flex items-center justify-between gap-3 border-b border-stone-200 dark:border-amber-800/40 pb-4">
                         <div class="min-w-0 flex-1">
                             <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
                                 <i data-lucide="book-open" class="size-3.5"></i> Majelis Ilmu
@@ -247,7 +251,7 @@
 
                     {{-- Kajian Hari Ini Highlight --}}
                     @if ($todayKajian->isNotEmpty())
-                        <div class="w-full rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent p-4 sm:p-6 relative overflow-hidden shadow-sm">
+                        <div class="w-full rounded-3xl bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent p-4 sm:p-6 relative overflow-hidden shadow-sm">
                             <div class="flex items-center justify-between gap-2">
                                 <p class="flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400">
                                     <i data-lucide="calendar-check" class="size-4"></i> Hari ini di {{ setting('name', config('masjid.name')) }}
@@ -256,7 +260,7 @@
                             </div>
                             <div class="mt-3.5 space-y-2.5">
                                 @foreach ($todayKajian as $k)
-                                    <a href="{{ route('kajian.show', $k) }}" wire:navigate class="flex items-center gap-3 sm:gap-4 rounded-2xl bg-card p-3.5 sm:p-4 transition-all hover:shadow-md border border-border w-full">
+                                    <a href="{{ route('kajian.show', $k) }}" wire:navigate class="flex items-center gap-3 sm:gap-4 rounded-2xl bg-white dark:bg-[#251e18] p-3.5 sm:p-4 transition-all hover:shadow-md w-full">
                                         <span class="grid size-11 sm:size-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-600 to-amber-800 font-outfit text-xs sm:text-sm font-extrabold text-white shadow-md">
                                             {{ $k->start_at?->format('H:i') }}
                                         </span>
@@ -277,11 +281,12 @@
                     <div class="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-3 w-full min-w-0">
                         @forelse ($kajians as $k)
                             <a href="{{ route('kajian.show', $k) }}" wire:navigate
-                               class="group overflow-hidden rounded-2xl border border-border bg-card card-transition shadow-sm w-full hover:border-amber-500/50">
-                                <div class="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-muted relative">
+                               data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}"
+                               class="group overflow-hidden rounded-2xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md w-full">
+                                <div class="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-stone-900/20 relative">
                                     <img src="{{ img_url($k->poster, $k->slug) }}" alt="{{ $k->title }}"
                                          class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                    <span class="absolute top-3 left-3 rounded-full bg-black/75 backdrop-blur-md px-3 py-1 text-[0.68rem] font-bold text-amber-300 border border-white/20">
+                                    <span class="absolute top-3 left-3 rounded-full bg-black/75 backdrop-blur-md px-3 py-1 text-[0.68rem] font-bold text-amber-300">
                                         {{ $k->start_at?->translatedFormat('l, d M') }}
                                     </span>
                                 </div>
@@ -294,7 +299,7 @@
                                 </div>
                             </a>
                         @empty
-                            <p class="sm:col-span-3 rounded-2xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground w-full">
+                            <p class="sm:col-span-3 rounded-2xl border border-dashed border-stone-300 dark:border-amber-900/40 py-12 text-center text-sm text-muted-foreground w-full">
                                 Belum ada jadwal kajian terbaru.
                             </p>
                         @endforelse
@@ -302,16 +307,16 @@
                 </div>
 
                 {{-- Kanan: Khutbah Jumat & Agenda --}}
-                <div class="w-full min-w-0 space-y-6">
+                <div class="w-full min-w-0 space-y-6" data-aos="fade-up" data-aos-delay="150">
                     @if ($jumat)
-                        <div class="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-stone-950 text-white p-5 sm:p-7 shadow-2xl flex flex-col items-center justify-center text-center">
+                        <div class="relative overflow-hidden rounded-3xl bg-[#1c1511] text-white p-5 sm:p-7 shadow-2xl flex flex-col items-center justify-center text-center">
                             {{-- Dark background layers --}}
-                            <div class="absolute inset-0 bg-stone-950 z-0"></div>
+                            <div class="absolute inset-0 bg-[#1c1511] z-0"></div>
                             <div class="absolute inset-0 bg-islamic-pattern opacity-20 z-0"></div>
 
                             <div class="relative z-10 w-full flex flex-col items-center text-center">
                                 {{-- Header badge --}}
-                                <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 border border-amber-500/40 px-3.5 py-1 text-xs font-bold text-amber-300 mb-3">
+                                <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 mb-3">
                                     <i data-lucide="mic-vocal" class="size-4 text-amber-400"></i>
                                     <span>Khutbah Jumat Minggu Ini</span>
                                 </div>
@@ -322,7 +327,7 @@
                                 </h3>
 
                                 {{-- Details list --}}
-                                <div class="mt-4 w-full max-w-md space-y-2.5 text-xs font-medium rounded-2xl bg-stone-900/90 p-4 border border-amber-500/25 shadow-inner text-start">
+                                <div class="mt-4 w-full max-w-md space-y-2.5 text-xs font-medium rounded-2xl bg-[#281f18]/90 p-4 shadow-inner text-start">
                                     <div class="flex items-center justify-between gap-3">
                                         <span class="text-stone-300 font-medium">Khatib:</span>
                                         <span class="font-bold text-amber-300 text-end">{{ $jumat->khatib }}</span>
@@ -349,18 +354,18 @@
                     @endif
 
                     {{-- Agenda Terdekat --}}
-                    <div class="rounded-2xl sm:rounded-3xl border border-border bg-card p-4 sm:p-6 shadow-sm">
-                        <div class="flex items-center justify-between border-b border-border pb-3">
+                    <div class="rounded-2xl sm:rounded-3xl bg-white dark:bg-[#251e18] p-4 sm:p-6 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-stone-200 dark:border-amber-800/40 pb-3">
                             <h3 class="font-bold text-foreground font-jakarta flex items-center gap-2">
                                 <i data-lucide="calendar-days" class="size-4 text-amber-600 dark:text-amber-400"></i>
                                 <span>Agenda Terdekat</span>
                             </h3>
                             <a href="{{ route('kalender') }}" wire:navigate class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline">Kalender</a>
                         </div>
-                        <div class="mt-4 divide-y divide-border/60">
+                        <div class="mt-4 divide-y divide-stone-200 dark:divide-amber-800/40">
                             @forelse ($events as $e)
                                 <div class="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
-                                    <div class="grid size-11 shrink-0 place-items-center rounded-xl text-center shadow-sm border border-border/40"
+                                    <div class="grid size-11 shrink-0 place-items-center rounded-xl text-center shadow-sm border border-stone-200 dark:border-amber-800/40"
                                          style="background: {{ $e->type_color }}15; color: {{ $e->type_color }}">
                                         <div>
                                             <p class="text-[0.58rem] font-bold uppercase leading-none opacity-80">{{ $e->start_at->translatedFormat('M') }}</p>
@@ -390,9 +395,9 @@
 
     {{-- ══════════════ DONASI & GALANG DANA ══════════════ --}}
     @if ($campaigns->isNotEmpty())
-        <section class="border-b border-stone-200 dark:border-amber-700/20 bg-white dark:bg-stone-950 py-10 sm:py-16">
+        <section class="border-b border-stone-200 dark:border-amber-800/50 bg-white dark:bg-[#18120e] py-10 sm:py-16">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+                <div class="flex items-center justify-between gap-3 border-b border-stone-200 dark:border-amber-800/40 pb-4">
                     <div class="min-w-0 flex-1">
                         <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-500">
                             <i data-lucide="hand-heart" class="size-3.5"></i> Donasi Transparan
@@ -408,12 +413,13 @@
                 <div class="mt-8 grid gap-6 md:grid-cols-3">
                     @foreach ($campaigns as $c)
                         <a href="{{ route('donasi.show', $c) }}" wire:navigate
-                           class="group overflow-hidden rounded-3xl border border-border bg-card card-transition shadow-sm hover:shadow-md hover:border-amber-500/40">
-                            <div class="relative aspect-[16/10] overflow-hidden bg-muted">
+                           data-aos="fade-up" data-aos-delay="{{ $loop->index * 90 }}"
+                           class="group overflow-hidden rounded-3xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md">
+                            <div class="relative aspect-[16/10] overflow-hidden bg-stone-900/20">
                                 <img src="{{ img_url($c->cover, $c->slug) }}" alt="{{ $c->title }}"
                                      class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 @if ($c->days_left !== null)
-                                    <span class="absolute end-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-amber-300 backdrop-blur-md border border-white/20">
+                                    <span class="absolute end-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-amber-300 backdrop-blur-md">
                                         {{ $c->days_left > 0 ? $c->days_left.' hari lagi' : 'Berakhir' }}
                                     </span>
                                 @endif
@@ -440,9 +446,9 @@
     @endif
 
     {{-- ══════════════ TRANSPARANSI KEUANGAN REALTIME ══════════════ --}}
-    <section class="w-full bg-stone-50/70 dark:bg-stone-900/40 border-b border-stone-200/80 dark:border-stone-800/80 py-10 sm:py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="overflow-hidden rounded-3xl border border-amber-700/25 bg-card shadow-xl bg-islamic-pattern card-transition">
+    <section class="w-full bg-stone-50/90 dark:bg-[#140e0b]/90 border-b border-stone-200/80 dark:border-amber-800/50 py-10 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+            <div class="overflow-hidden rounded-3xl border border-stone-200 dark:border-amber-700/40 bg-white dark:bg-[#221b16] shadow-xl bg-islamic-pattern card-transition">
                 <div class="grid lg:grid-cols-[1fr_1.1fr]">
                     <div class="p-8 sm:p-10 flex flex-col justify-between">
                         <div>
@@ -463,15 +469,15 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-px bg-border sm:grid-cols-2 lg:border-s lg:border-border">
+                    <div class="grid grid-cols-2 gap-px bg-stone-200 dark:bg-amber-700/40 sm:grid-cols-2 lg:border-s lg:border-stone-200 dark:lg:border-amber-700/40 border-t lg:border-t-0 border-stone-200 dark:border-amber-700/40">
                         @foreach ([
                             ['Pemasukan ' . now()->year, $income, 'trending-up', 'text-amber-600 dark:text-amber-400'],
                             ['Pengeluaran ' . now()->year, $expense, 'trending-down', 'text-rose-600 dark:text-rose-400'],
                             ['Saldo Kas Berjalan', $balance, 'wallet', 'text-amber-500'],
                             ['Donatur Terdaftar', $campaigns->sum('donor_count'), 'users', 'text-foreground'],
                         ] as $i => [$label, $value, $icon, $tone])
-                            <div class="bg-card p-6 flex flex-col justify-center">
-                                <span class="grid size-10 place-items-center rounded-xl bg-muted/60 mb-3">
+                            <div class="bg-white dark:bg-[#2c231c] p-6 flex flex-col justify-center">
+                                <span class="grid size-10 place-items-center rounded-xl bg-amber-500/10 mb-3">
                                     <i data-lucide="{{ $icon }}" class="size-5 {{ $tone }}"></i>
                                 </span>
                                 <p class="text-xs font-medium text-muted-foreground">{{ $label }}</p>
@@ -487,8 +493,8 @@
     </section>
 
     {{-- ══════════════ AL-QURAN DIGITAL & E-LIBRARY ══════════════ --}}
-    <section class="border-t border-amber-700/30 bg-stone-950 bg-gradient-to-r from-stone-950 via-stone-900 to-amber-950 text-white py-10 sm:py-16 relative overflow-hidden bg-islamic-pattern">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section class="border-b border-stone-200 dark:border-amber-800/50 bg-[#1a130f] bg-gradient-to-r from-[#1a130f] via-[#241a14] to-[#2d1f16] text-white py-10 sm:py-16 relative overflow-hidden bg-islamic-pattern">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-aos="fade-up">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
                 <div class="space-y-5">
                     <span class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 border border-amber-500/30">
@@ -513,7 +519,7 @@
                 </div>
 
                 {{-- Preview Verse Banner --}}
-                <div class="rounded-3xl bg-stone-900/90 border border-amber-500/30 p-8 text-center space-y-4 shadow-2xl relative backdrop-blur">
+                <div class="rounded-3xl bg-[#281e17]/90 p-8 text-center space-y-4 shadow-2xl relative backdrop-blur">
                     <p class="bismillah-text text-amber-400">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
                     <p class="quran-arabic text-amber-100 leading-widest">
                         اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
@@ -527,8 +533,8 @@
     </section>
 
     {{-- ══════════════ LOKASI & PETA MASJID ══════════════ --}}
-    <section class="border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950 py-10 sm:py-16">
-        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <section class="border-b border-stone-200 dark:border-amber-800/50 bg-white dark:bg-[#18120e] py-10 sm:py-16">
+        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8" data-aos="fade-up">
             <div class="space-y-6">
                 <div>
                     <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
@@ -543,7 +549,7 @@
                         ['Arah Presisi Kiblat', number_format(app(\App\Services\PrayerTimeService::class)->qiblaDirection(), 1).'° dari Utara', 'compass'],
                         ['Jarak ke Ka\'bah', number_format(app(\App\Services\PrayerTimeService::class)->qiblaDistance(), 0, ',', '.').' km', 'route'],
                     ] as [$label, $value, $icon])
-                        <div class="rounded-2xl border border-border bg-card p-5 card-lift-sm">
+                        <div class="rounded-2xl bg-white dark:bg-[#251e18] p-5 card-lift-sm shadow-sm">
                             <i data-lucide="{{ $icon }}" class="size-6 text-amber-500"></i>
                             <dt class="mt-3 text-xs font-medium text-muted-foreground">{{ $label }}</dt>
                             <dd class="font-outfit text-lg font-extrabold text-foreground mt-0.5">{{ $value }}</dd>
@@ -557,7 +563,7 @@
                 </div>
             </div>
 
-            <div class="overflow-hidden rounded-3xl border border-border shadow-md">
+            <div class="overflow-hidden rounded-3xl border border-stone-200 dark:border-amber-800/40 shadow-md">
                 <iframe
                     src="https://www.openstreetmap.org/export/embed.html?bbox={{ config('masjid.lng') - 0.004 }},{{ config('masjid.lat') - 0.003 }},{{ config('masjid.lng') + 0.004 }},{{ config('masjid.lat') + 0.003 }}&layer=mapnik&marker={{ config('masjid.lat') }},{{ config('masjid.lng') }}"
                     class="h-80 w-full lg:h-full" style="border:0" loading="lazy" title="Peta Masjid Al-Ikhlash"></iframe>

@@ -43,6 +43,8 @@
         })();
     </script>
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('head')
@@ -59,6 +61,19 @@
 
     <x-ui.toaster />
     @livewireScripts
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 750, once: true, easing: 'ease-out-cubic' });
+            }
+        });
+        document.addEventListener('livewire:navigated', function () {
+            if (typeof AOS !== 'undefined') {
+                AOS.refreshHard();
+            }
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

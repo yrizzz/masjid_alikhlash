@@ -74,26 +74,26 @@
 }
 
 .dark {
-    --background: 222 47% 7%;
-    --foreground: 213 31% 91%;
+    --background: 24 35% 8%;
+    --foreground: 35 25% 92%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 213 31% 91%;
+    --card: 24 25% 13%;
+    --card-foreground: 35 25% 92%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 213 31% 91%;
+    --popover: 24 25% 13%;
+    --popover-foreground: 35 25% 92%;
 
-    --primary: 221 83% 60%;
+    --primary: 38 92% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 15%;
-    --secondary-foreground: 213 31% 91%;
+    --secondary: 24 22% 18%;
+    --secondary-foreground: 35 25% 92%;
 
-    --muted: 217 33% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 24 20% 18%;
+    --muted-foreground: 35 15% 65%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 213 31% 95%;
+    --accent: 24 22% 20%;
+    --accent-foreground: 35 25% 95%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -102,12 +102,12 @@
     --warning: 38 92% 50%;
     --info: 199 89% 48%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 221 83% 60%;
+    --border: 30 35% 25%;
+    --input: 30 35% 25%;
+    --ring: 38 92% 50%;
 
-    --sidebar: 222 47% 11%;
-    --sidebar-foreground: 215 20% 65%;
+    --sidebar: 24 28% 10%;
+    --sidebar-foreground: 35 15% 65%;
     --sidebar-muted: 215 16% 47%;
     --sidebar-border: 217 33% 17%;
     --sidebar-accent: 217 33% 17%;
@@ -1678,3 +1678,28 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
     pointer-events: none;
 }
+
+/* ============================================================
+   Page-Load Entrance Animations (Hero & Key Elements)
+   ============================================================ */
+@keyframes heroFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-animate {
+    animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-delay-1 { animation-delay: 100ms; }
+.hero-delay-2 { animation-delay: 220ms; }
+.hero-delay-3 { animation-delay: 340ms; }
+.hero-delay-4 { animation-delay: 460ms; }
+.hero-delay-5 { animation-delay: 580ms; }
+
