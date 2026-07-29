@@ -215,159 +215,161 @@
     </section>
 
     {{-- ══════════════ KAJIAN & KHUTBAH JUMAT ══════════════ --}}
-    <section class="mx-auto max-w-7xl w-full min-w-0 px-4 py-8 sm:py-16 sm:px-6 lg:px-8 bg-islamic-pattern">
-        <div class="grid gap-8 lg:grid-cols-3 w-full min-w-0">
-            {{-- Kiri: Kajian Mendatang --}}
-            <div class="lg:col-span-2 w-full min-w-0 space-y-6">
-                <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
-                    <div class="min-w-0 flex-1">
-                        <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
-                            <i data-lucide="book-open" class="size-3.5"></i> Majelis Ilmu
-                        </span>
-                        <h2 class="text-base xs:text-xl sm:text-3xl font-extrabold tracking-tight text-foreground font-jakarta mt-0.5 truncate">Kajian Rutin & Tematik</h2>
-                    </div>
-                    <a href="{{ route('kajian') }}" wire:navigate class="shrink-0 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1">
-                        <span>Lihat Semua</span>
-                        <i data-lucide="arrow-right" class="size-3.5"></i>
-                    </a>
-                </div>
-
-                {{-- Kajian Hari Ini Highlight --}}
-                @if ($todayKajian->isNotEmpty())
-                    <div class="w-full rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent p-4 sm:p-6 relative overflow-hidden shadow-sm">
-                        <div class="flex items-center justify-between gap-2">
-                            <p class="flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400">
-                                <i data-lucide="calendar-check" class="size-4"></i> Hari ini di {{ setting('name', config('masjid.name')) }}
-                            </p>
-                            <span class="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-[0.65rem] sm:text-[0.68rem] font-bold text-amber-700 dark:text-amber-300 uppercase">Live Majelis</span>
+    <section class="w-full border-y border-stone-200/80 dark:border-stone-800/80 bg-stone-50/70 dark:bg-stone-900/40 py-10 sm:py-16">
+        <div class="mx-auto max-w-7xl w-full min-w-0 px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-8 lg:grid-cols-3 w-full min-w-0">
+                {{-- Kiri: Kajian Mendatang --}}
+                <div class="lg:col-span-2 w-full min-w-0 space-y-6">
+                    <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+                        <div class="min-w-0 flex-1">
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                                <i data-lucide="book-open" class="size-3.5"></i> Majelis Ilmu
+                            </span>
+                            <h2 class="text-base xs:text-xl sm:text-3xl font-extrabold tracking-tight text-foreground font-jakarta mt-0.5 truncate">Kajian Rutin & Tematik</h2>
                         </div>
-                        <div class="mt-3.5 space-y-2.5">
-                            @foreach ($todayKajian as $k)
-                                <a href="{{ route('kajian.show', $k) }}" wire:navigate class="flex items-center gap-3 sm:gap-4 rounded-2xl bg-card p-3.5 sm:p-4 transition-all hover:shadow-md border border-border w-full">
-                                    <span class="grid size-11 sm:size-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-600 to-amber-800 font-outfit text-xs sm:text-sm font-extrabold text-white shadow-md">
-                                        {{ $k->start_at?->format('H:i') }}
-                                    </span>
-                                    <span class="min-w-0 flex-1">
-                                        <span class="block truncate font-bold text-xs sm:text-base text-foreground">{{ $k->title }}</span>
-                                        <span class="block truncate text-[0.7rem] sm:text-xs font-medium text-muted-foreground flex items-center gap-1.5 mt-0.5">
-                                            <i data-lucide="user" class="size-3.5 text-amber-500"></i> {{ $k->ustadz }}
-                                        </span>
-                                    </span>
-                                    <i data-lucide="chevron-right" class="size-4 sm:size-5 shrink-0 text-muted-foreground"></i>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
-                {{-- Grid Kajian --}}
-                <div class="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-3 w-full min-w-0">
-                    @forelse ($kajians as $k)
-                        <a href="{{ route('kajian.show', $k) }}" wire:navigate
-                           class="group overflow-hidden rounded-2xl border border-border bg-card card-transition shadow-sm w-full hover:border-amber-500/50">
-                            <div class="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-muted relative">
-                                <img src="{{ img_url($k->poster, $k->slug) }}" alt="{{ $k->title }}"
-                                     class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                <span class="absolute top-3 left-3 rounded-full bg-black/75 backdrop-blur-md px-3 py-1 text-[0.68rem] font-bold text-amber-300 border border-white/20">
-                                    {{ $k->start_at?->translatedFormat('l, d M') }}
-                                </span>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-xs font-bold text-amber-600 dark:text-amber-400">{{ $k->start_at?->format('H:i') }} WIB</p>
-                                <h3 class="mt-1 line-clamp-2 font-bold text-foreground leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">{{ $k->title }}</h3>
-                                <p class="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-                                    <i data-lucide="user-round" class="size-3.5 text-amber-500"></i>{{ $k->ustadz }}
-                                </p>
-                            </div>
+                        <a href="{{ route('kajian') }}" wire:navigate class="shrink-0 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1">
+                            <span>Lihat Semua</span>
+                            <i data-lucide="arrow-right" class="size-3.5"></i>
                         </a>
-                    @empty
-                        <p class="sm:col-span-3 rounded-2xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground w-full">
-                            Belum ada jadwal kajian terbaru.
-                        </p>
-                    @endforelse
-                </div>
-            </div>
+                    </div>
 
-            {{-- Kanan: Khutbah Jumat & Agenda --}}
-            <div class="w-full min-w-0 space-y-6">
-                @if ($jumat)
-                    <div class="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-stone-950 text-white p-5 sm:p-7 shadow-2xl flex flex-col items-center justify-center text-center">
-                        {{-- Dark background layers --}}
-                        <div class="absolute inset-0 bg-stone-950 z-0"></div>
-                        <div class="absolute inset-0 bg-islamic-pattern opacity-20 z-0"></div>
-
-                        <div class="relative z-10 w-full flex flex-col items-center text-center">
-                            {{-- Header badge --}}
-                            <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 border border-amber-500/40 px-3.5 py-1 text-xs font-bold text-amber-300 mb-3">
-                                <i data-lucide="mic-vocal" class="size-4 text-amber-400"></i>
-                                <span>Khutbah Jumat Minggu Ini</span>
+                    {{-- Kajian Hari Ini Highlight --}}
+                    @if ($todayKajian->isNotEmpty())
+                        <div class="w-full rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent p-4 sm:p-6 relative overflow-hidden shadow-sm">
+                            <div class="flex items-center justify-between gap-2">
+                                <p class="flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400">
+                                    <i data-lucide="calendar-check" class="size-4"></i> Hari ini di {{ setting('name', config('masjid.name')) }}
+                                </p>
+                                <span class="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-[0.65rem] sm:text-[0.68rem] font-bold text-amber-700 dark:text-amber-300 uppercase">Live Majelis</span>
                             </div>
-
-                            {{-- Theme title --}}
-                            <h3 class="text-base sm:text-lg font-extrabold leading-snug text-white font-jakarta max-w-md mx-auto drop-shadow-sm">
-                                {{ $jumat->theme }}
-                            </h3>
-
-                            {{-- Details list --}}
-                            <div class="mt-4 w-full max-w-md space-y-2.5 text-xs font-medium rounded-2xl bg-stone-900/90 p-4 border border-amber-500/25 shadow-inner text-start">
-                                <div class="flex items-center justify-between gap-3">
-                                    <span class="text-stone-300 font-medium">Khatib:</span>
-                                    <span class="font-bold text-amber-300 text-end">{{ $jumat->khatib }}</span>
-                                </div>
-                                @if ($jumat->imam)
-                                    <div class="flex items-center justify-between gap-3 border-t border-white/10 pt-2">
-                                        <span class="text-stone-300 font-medium">Imam Sholat:</span>
-                                        <span class="font-bold text-amber-300 text-end">{{ $jumat->imam }}</span>
-                                    </div>
-                                @endif
-                                <div class="flex items-center justify-between gap-3 border-t border-white/10 pt-2">
-                                    <span class="text-stone-300 font-medium">Tanggal:</span>
-                                    <span class="font-bold text-amber-400 text-end">{{ tanggal_id($jumat->date, false) }}</span>
-                                </div>
+                            <div class="mt-3.5 space-y-2.5">
+                                @foreach ($todayKajian as $k)
+                                    <a href="{{ route('kajian.show', $k) }}" wire:navigate class="flex items-center gap-3 sm:gap-4 rounded-2xl bg-card p-3.5 sm:p-4 transition-all hover:shadow-md border border-border w-full">
+                                        <span class="grid size-11 sm:size-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-600 to-amber-800 font-outfit text-xs sm:text-sm font-extrabold text-white shadow-md">
+                                            {{ $k->start_at?->format('H:i') }}
+                                        </span>
+                                        <span class="min-w-0 flex-1">
+                                            <span class="block truncate font-bold text-xs sm:text-base text-foreground">{{ $k->title }}</span>
+                                            <span class="block truncate text-[0.7rem] sm:text-xs font-medium text-muted-foreground flex items-center gap-1.5 mt-0.5">
+                                                <i data-lucide="user" class="size-3.5 text-amber-500"></i> {{ $k->ustadz }}
+                                            </span>
+                                        </span>
+                                        <i data-lucide="chevron-right" class="size-4 sm:size-5 shrink-0 text-muted-foreground"></i>
+                                    </a>
+                                @endforeach
                             </div>
-
-                            {{-- Action link --}}
-                            <a href="{{ route('jumat') }}" wire:navigate class="mt-4 inline-flex items-center justify-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors">
-                                <span>Jadwal Khutbah Jumat Lengkap</span>
-                                <i data-lucide="arrow-right" class="size-3.5"></i>
-                            </a>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                {{-- Agenda Terdekat --}}
-                <div class="rounded-2xl sm:rounded-3xl border border-border bg-card p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between border-b border-border pb-3">
-                        <h3 class="font-bold text-foreground font-jakarta flex items-center gap-2">
-                            <i data-lucide="calendar-days" class="size-4 text-amber-600 dark:text-amber-400"></i>
-                            <span>Agenda Terdekat</span>
-                        </h3>
-                        <a href="{{ route('kalender') }}" wire:navigate class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline">Kalender</a>
-                    </div>
-                    <div class="mt-4 divide-y divide-border/60">
-                        @forelse ($events as $e)
-                            <div class="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
-                                <div class="grid size-11 shrink-0 place-items-center rounded-xl text-center shadow-sm border border-border/40"
-                                     style="background: {{ $e->type_color }}15; color: {{ $e->type_color }}">
-                                    <div>
-                                        <p class="text-[0.58rem] font-bold uppercase leading-none opacity-80">{{ $e->start_at->translatedFormat('M') }}</p>
-                                        <p class="font-outfit text-base font-extrabold leading-tight mt-0.5">{{ $e->start_at->format('d') }}</p>
-                                    </div>
+                    {{-- Grid Kajian --}}
+                    <div class="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-3 w-full min-w-0">
+                        @forelse ($kajians as $k)
+                            <a href="{{ route('kajian.show', $k) }}" wire:navigate
+                               class="group overflow-hidden rounded-2xl border border-border bg-card card-transition shadow-sm w-full hover:border-amber-500/50">
+                                <div class="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-muted relative">
+                                    <img src="{{ img_url($k->poster, $k->slug) }}" alt="{{ $k->title }}"
+                                         class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    <span class="absolute top-3 left-3 rounded-full bg-black/75 backdrop-blur-md px-3 py-1 text-[0.68rem] font-bold text-amber-300 border border-white/20">
+                                        {{ $k->start_at?->translatedFormat('l, d M') }}
+                                    </span>
                                 </div>
-                                <div class="min-w-0 flex-1">
-                                    <p class="truncate text-xs sm:text-sm font-bold text-foreground leading-snug">{{ $e->title }}</p>
-                                    <p class="truncate text-[0.7rem] sm:text-xs font-medium text-muted-foreground mt-0.5 flex items-center gap-1">
-                                        <i data-lucide="clock" class="size-3 shrink-0 text-amber-500"></i>
-                                        <span>{{ $e->all_day ? 'Sepanjang hari' : $e->start_at->format('H:i') }} WIB</span>
-                                        @if ($e->location)
-                                            <span class="truncate">· {{ $e->location }}</span>
-                                        @endif
+                                <div class="p-4">
+                                    <p class="text-xs font-bold text-amber-600 dark:text-amber-400">{{ $k->start_at?->format('H:i') }} WIB</p>
+                                    <h3 class="mt-1 line-clamp-2 font-bold text-foreground leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">{{ $k->title }}</h3>
+                                    <p class="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                                        <i data-lucide="user-round" class="size-3.5 text-amber-500"></i>{{ $k->ustadz }}
                                     </p>
                                 </div>
-                            </div>
+                            </a>
                         @empty
-                            <p class="py-6 text-center text-sm text-muted-foreground">Belum ada agenda terdekat.</p>
+                            <p class="sm:col-span-3 rounded-2xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground w-full">
+                                Belum ada jadwal kajian terbaru.
+                            </p>
                         @endforelse
+                    </div>
+                </div>
+
+                {{-- Kanan: Khutbah Jumat & Agenda --}}
+                <div class="w-full min-w-0 space-y-6">
+                    @if ($jumat)
+                        <div class="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-stone-950 text-white p-5 sm:p-7 shadow-2xl flex flex-col items-center justify-center text-center">
+                            {{-- Dark background layers --}}
+                            <div class="absolute inset-0 bg-stone-950 z-0"></div>
+                            <div class="absolute inset-0 bg-islamic-pattern opacity-20 z-0"></div>
+
+                            <div class="relative z-10 w-full flex flex-col items-center text-center">
+                                {{-- Header badge --}}
+                                <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 border border-amber-500/40 px-3.5 py-1 text-xs font-bold text-amber-300 mb-3">
+                                    <i data-lucide="mic-vocal" class="size-4 text-amber-400"></i>
+                                    <span>Khutbah Jumat Minggu Ini</span>
+                                </div>
+
+                                {{-- Theme title --}}
+                                <h3 class="text-base sm:text-lg font-extrabold leading-snug text-white font-jakarta max-w-md mx-auto drop-shadow-sm">
+                                    {{ $jumat->theme }}
+                                </h3>
+
+                                {{-- Details list --}}
+                                <div class="mt-4 w-full max-w-md space-y-2.5 text-xs font-medium rounded-2xl bg-stone-900/90 p-4 border border-amber-500/25 shadow-inner text-start">
+                                    <div class="flex items-center justify-between gap-3">
+                                        <span class="text-stone-300 font-medium">Khatib:</span>
+                                        <span class="font-bold text-amber-300 text-end">{{ $jumat->khatib }}</span>
+                                    </div>
+                                    @if ($jumat->imam)
+                                        <div class="flex items-center justify-between gap-3 border-t border-white/10 pt-2">
+                                            <span class="text-stone-300 font-medium">Imam Sholat:</span>
+                                            <span class="font-bold text-amber-300 text-end">{{ $jumat->imam }}</span>
+                                        </div>
+                                    @endif
+                                    <div class="flex items-center justify-between gap-3 border-t border-white/10 pt-2">
+                                        <span class="text-stone-300 font-medium">Tanggal:</span>
+                                        <span class="font-bold text-amber-400 text-end">{{ tanggal_id($jumat->date, false) }}</span>
+                                    </div>
+                                </div>
+
+                                {{-- Action link --}}
+                                <a href="{{ route('jumat') }}" wire:navigate class="mt-4 inline-flex items-center justify-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors">
+                                    <span>Jadwal Khutbah Jumat Lengkap</span>
+                                    <i data-lucide="arrow-right" class="size-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- Agenda Terdekat --}}
+                    <div class="rounded-2xl sm:rounded-3xl border border-border bg-card p-4 sm:p-6 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-border pb-3">
+                            <h3 class="font-bold text-foreground font-jakarta flex items-center gap-2">
+                                <i data-lucide="calendar-days" class="size-4 text-amber-600 dark:text-amber-400"></i>
+                                <span>Agenda Terdekat</span>
+                            </h3>
+                            <a href="{{ route('kalender') }}" wire:navigate class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline">Kalender</a>
+                        </div>
+                        <div class="mt-4 divide-y divide-border/60">
+                            @forelse ($events as $e)
+                                <div class="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
+                                    <div class="grid size-11 shrink-0 place-items-center rounded-xl text-center shadow-sm border border-border/40"
+                                         style="background: {{ $e->type_color }}15; color: {{ $e->type_color }}">
+                                        <div>
+                                            <p class="text-[0.58rem] font-bold uppercase leading-none opacity-80">{{ $e->start_at->translatedFormat('M') }}</p>
+                                            <p class="font-outfit text-base font-extrabold leading-tight mt-0.5">{{ $e->start_at->format('d') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="truncate text-xs sm:text-sm font-bold text-foreground leading-snug">{{ $e->title }}</p>
+                                        <p class="truncate text-[0.7rem] sm:text-xs font-medium text-muted-foreground mt-0.5 flex items-center gap-1">
+                                            <i data-lucide="clock" class="size-3 shrink-0 text-amber-500"></i>
+                                            <span>{{ $e->all_day ? 'Sepanjang hari' : $e->start_at->format('H:i') }} WIB</span>
+                                            @if ($e->location)
+                                                <span class="truncate">· {{ $e->location }}</span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="py-6 text-center text-sm text-muted-foreground">Belum ada agenda terdekat.</p>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
@@ -376,7 +378,7 @@
 
     {{-- ══════════════ DONASI & GALANG DANA ══════════════ --}}
     @if ($campaigns->isNotEmpty())
-        <section class="border-y border-amber-700/20 bg-gradient-to-b from-stone-950/20 via-background to-background py-8 sm:py-16">
+        <section class="border-y border-stone-200 dark:border-amber-700/20 bg-white dark:bg-stone-950 py-8 sm:py-16">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
                     <div class="min-w-0 flex-1">
