@@ -3,8 +3,8 @@
 @endphp
 
 <div class="font-jakarta bg-background text-foreground antialiased selection:bg-amber-500 selection:text-stone-950">
-    {{-- ══════════════ HERO SECTION — CENTERED FULL-BLEED DESIGN ══════════════ --}}
-    <section class="hero-shell relative min-h-[92vh] sm:min-h-screen overflow-hidden flex flex-col justify-between">
+    {{-- ══════════════ HERO SECTION — CENTERED FULL-BLEED DESIGN (100VH FIT) ══════════════ --}}
+    <section class="hero-shell relative min-h-screen lg:h-screen overflow-hidden flex flex-col justify-between">
         {{-- Full bleed background photo --}}
         <div class="hero-bg absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
              style="background-image: url('{{ $heroImage }}')"></div>
@@ -15,21 +15,21 @@
                 linear-gradient(180deg, rgba(12,6,2,0.82) 0%, rgba(18,8,3,0.55) 40%, rgba(10,4,1,0.96) 100%),
                 radial-gradient(ellipse 70% 50% at 50% 30%, rgba(217,119,6,0.22) 0%, transparent 70%);"></div>
 
-        {{-- MAIN CONTENT CONTAINER: Centered Layout --}}
-        <div class="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center min-h-[82vh] px-4 pt-24 sm:pt-28 pb-36 text-center sm:px-6 lg:px-8">
+        {{-- MAIN CONTENT CONTAINER: Centered Layout with Viewport Fit --}}
+        <div class="relative z-10 mx-auto flex flex-1 w-full max-w-5xl flex-col items-center justify-center px-4 pt-20 sm:pt-24 pb-4 text-center sm:px-6 lg:px-8">
 
             {{-- Arabic verse ornament --}}
-            <div class="mb-5 max-w-xl mx-auto space-y-1">
-                <p class="font-amiri text-2xl sm:text-3xl tracking-wide text-amber-200/95 drop-shadow-md">
+            <div class="mb-3 sm:mb-4 max-w-xl mx-auto space-y-0.5">
+                <p class="font-amiri text-xl sm:text-2xl lg:text-3xl tracking-wide text-amber-200/95 drop-shadow-md">
                     إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
                 </p>
-                <p class="text-[0.68rem] font-extrabold uppercase tracking-[0.25em] text-amber-400/80">
+                <p class="text-[0.62rem] sm:text-[0.68rem] font-extrabold uppercase tracking-[0.25em] text-amber-400/80">
                     QS. AT-TAUBAH : 18
                 </p>
             </div>
 
             {{-- Hijri date badge --}}
-            <div class="inline-flex items-center gap-2.5 rounded-full bg-stone-950/70 border border-amber-400/40 px-4 py-1.5 text-xs font-semibold text-amber-200 shadow-xl backdrop-blur-xl mb-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-stone-950/70 border border-amber-400/40 px-3.5 py-1 text-[0.7rem] sm:text-xs font-semibold text-amber-200 shadow-xl backdrop-blur-xl mb-4">
                 <span class="relative flex size-2">
                     <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
                     <span class="relative inline-flex size-2 rounded-full bg-amber-400"></span>
@@ -37,86 +37,86 @@
                 <i data-lucide="moon-star" class="size-3.5 text-amber-300"></i>
                 <span>{{ $hijri['day_name'] }}, {{ $hijri['formatted'] }}</span>
                 @if ($holiday)
-                    <span class="border-s border-amber-400/40 ps-2.5 text-amber-300 font-bold">{{ $holiday }}</span>
+                    <span class="border-s border-amber-400/40 ps-2 text-amber-300 font-bold">{{ $holiday }}</span>
                 @endif
             </div>
 
             {{-- Mosque name & tagline --}}
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
                 Masjid Jami’<br />
                 <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
                     Al-Ikhlash
                 </span>
             </h1>
-            <p class="mt-4 max-w-xl text-sm sm:text-base text-stone-200/90 font-medium leading-relaxed">
+            <p class="mt-2.5 max-w-xl text-xs sm:text-sm lg:text-base text-stone-200/90 font-medium leading-relaxed">
                 Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
                 <span class="text-amber-400 font-bold">Kelurahan Kerten, Laweyan, Surakarta.</span>
             </p>
 
             {{-- 4 Stat Cards Grid --}}
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 w-full max-w-2xl mt-7">
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-2 text-amber-400 mb-1">
-                        <i data-lucide="users" class="size-4 shrink-0"></i>
-                        <span class="font-outfit text-base font-black text-white">950+</span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full max-w-2xl mt-5 sm:mt-6">
+                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
+                        <i data-lucide="users" class="size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-sm sm:text-base font-black text-white">950+</span>
                     </div>
-                    <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
+                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-2 text-amber-400 mb-1">
-                        <i data-lucide="book-open" class="size-4 shrink-0"></i>
-                        <span class="font-outfit text-base font-black text-white">12</span>
+                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
+                        <i data-lucide="book-open" class="size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-sm sm:text-base font-black text-white">12</span>
                     </div>
-                    <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
+                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-2 text-amber-400 mb-1">
-                        <i data-lucide="heart" class="size-4 shrink-0"></i>
-                        <span class="font-outfit text-base font-black text-white">Rp 18jt+</span>
+                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
+                        <i data-lucide="heart" class="size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-sm sm:text-base font-black text-white">Rp 18jt+</span>
                     </div>
-                    <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
+                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-2 text-amber-400 mb-1">
-                        <i data-lucide="user-check" class="size-4 shrink-0"></i>
+                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
+                        <i data-lucide="user-check" class="size-3.5 shrink-0"></i>
                         <span class="font-outfit text-base font-black text-white">25</span>
                     </div>
-                    <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
+                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
                 </div>
             </div>
 
             {{-- Action Pill Buttons Row --}}
-            <div class="flex flex-wrap items-center justify-center gap-2.5 mt-7">
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mt-5 sm:mt-6">
                 <a href="{{ route('donasi') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 py-3 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
+                   class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
                     <i data-lucide="hand-heart" class="size-4"></i>
                     <span>Donasi Sekarang</span>
                     <i data-lucide="arrow-right" class="size-3.5 ms-0.5"></i>
                 </a>
 
                 <a href="{{ route('kajian') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4.5 py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
                     <i data-lucide="book-open" class="size-4 text-amber-400"></i>
                     <span>Jadwal Kajian</span>
                 </a>
 
                 <a href="{{ route('live') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4.5 py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
                     <i data-lucide="radio" class="size-4 text-amber-400"></i>
                     <span>Live Streaming</span>
                 </a>
 
                 <a href="{{ route('imam') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4.5 py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
                     <i data-lucide="user-check" class="size-4 text-amber-400"></i>
                     <span>Jadwal Imam</span>
                 </a>
 
                 <a href="{{ route('kiblat') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4.5 py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
                     <i data-lucide="compass" class="size-4 text-amber-400"></i>
                     <span>Arah Kiblat</span>
                 </a>
@@ -124,7 +124,7 @@
 
             {{-- Live Kajian Indicator Pill --}}
             @if ($live && $live->status === 'live')
-                <a href="{{ route('live') }}" wire:navigate class="mt-6 inline-flex items-center gap-3 rounded-full border border-rose-500/50 bg-rose-950/80 px-5 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-xl hover:bg-rose-900 transition-all">
+                <a href="{{ route('live') }}" wire:navigate class="mt-4 inline-flex items-center gap-3 rounded-full border border-rose-500/50 bg-rose-950/80 px-4 py-1.5 text-xs font-bold text-white shadow-xl backdrop-blur-xl hover:bg-rose-900 transition-all">
                     <span class="relative flex size-2">
                         <span class="absolute inline-flex size-full animate-ping rounded-full bg-rose-400"></span>
                         <span class="relative inline-flex size-2 rounded-full bg-rose-500"></span>
@@ -215,7 +215,7 @@
     </section>
 
     {{-- ══════════════ KAJIAN & KHUTBAH JUMAT ══════════════ --}}
-    <section class="w-full border-y border-stone-200/80 dark:border-stone-800/80 bg-stone-50/70 dark:bg-stone-900/40 py-10 sm:py-16">
+    <section class="relative w-full border-y border-stone-200/80 dark:border-stone-800/80 bg-stone-50/80 dark:bg-stone-900/40 py-10 sm:py-16 bg-islamic-pattern">
         <div class="mx-auto max-w-7xl w-full min-w-0 px-4 sm:px-6 lg:px-8">
             <div class="grid gap-8 lg:grid-cols-3 w-full min-w-0">
                 {{-- Kiri: Kajian Mendatang --}}
@@ -378,7 +378,7 @@
 
     {{-- ══════════════ DONASI & GALANG DANA ══════════════ --}}
     @if ($campaigns->isNotEmpty())
-        <section class="border-y border-stone-200 dark:border-amber-700/20 bg-white dark:bg-stone-950 py-8 sm:py-16">
+        <section class="border-b border-stone-200 dark:border-amber-700/20 bg-white dark:bg-stone-950 py-10 sm:py-16">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
                     <div class="min-w-0 flex-1">
@@ -396,7 +396,7 @@
                 <div class="mt-8 grid gap-6 md:grid-cols-3">
                     @foreach ($campaigns as $c)
                         <a href="{{ route('donasi.show', $c) }}" wire:navigate
-                           class="group overflow-hidden rounded-3xl border border-border bg-card card-transition">
+                           class="group overflow-hidden rounded-3xl border border-border bg-card card-transition shadow-sm hover:shadow-md hover:border-amber-500/40">
                             <div class="relative aspect-[16/10] overflow-hidden bg-muted">
                                 <img src="{{ img_url($c->cover, $c->slug) }}" alt="{{ $c->title }}"
                                      class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -428,52 +428,54 @@
     @endif
 
     {{-- ══════════════ TRANSPARANSI KEUANGAN REALTIME ══════════════ --}}
-    <section class="mx-auto max-w-7xl px-4 py-8 sm:py-16 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-3xl border border-amber-700/25 bg-card shadow-xl bg-islamic-pattern card-transition">
-            <div class="grid lg:grid-cols-[1fr_1.1fr]">
-                <div class="p-8 sm:p-10 flex flex-col justify-between">
-                    <div>
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400 border border-amber-500/20">
-                            <i data-lucide="shield-check" class="size-4"></i> Transparansi Realtime
-                        </span>
-                        <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl font-jakarta">
-                            Laporan Keuangan Terbuka & Akuntabel
-                        </h2>
-                        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
-                            Seluruh dana infaq, shadaqah, dan donasi masjid dicatat secara realtime dan dipublikasikan tanpa keraguan. Umat dapat memantau serta mengunduh laporan keuangan kapan saja.
-                        </p>
-                    </div>
-                    <div class="mt-8">
-                        <a href="{{ route('transparansi') }}" wire:navigate>
-                            <x-ui.button icon="chart-pie" class="bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition-all">Lihat Laporan Transparan</x-ui.button>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-px bg-border sm:grid-cols-2 lg:border-s lg:border-border">
-                    @foreach ([
-                        ['Pemasukan ' . now()->year, $income, 'trending-up', 'text-amber-600 dark:text-amber-400'],
-                        ['Pengeluaran ' . now()->year, $expense, 'trending-down', 'text-rose-600 dark:text-rose-400'],
-                        ['Saldo Kas Berjalan', $balance, 'wallet', 'text-amber-500'],
-                        ['Donatur Terdaftar', $campaigns->sum('donor_count'), 'users', 'text-foreground'],
-                    ] as $i => [$label, $value, $icon, $tone])
-                        <div class="bg-card p-6 flex flex-col justify-center">
-                            <span class="grid size-10 place-items-center rounded-xl bg-muted/60 mb-3">
-                                <i data-lucide="{{ $icon }}" class="size-5 {{ $tone }}"></i>
+    <section class="w-full bg-stone-50/70 dark:bg-stone-900/40 border-b border-stone-200/80 dark:border-stone-800/80 py-10 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="overflow-hidden rounded-3xl border border-amber-700/25 bg-card shadow-xl bg-islamic-pattern card-transition">
+                <div class="grid lg:grid-cols-[1fr_1.1fr]">
+                    <div class="p-8 sm:p-10 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                                <i data-lucide="shield-check" class="size-4"></i> Transparansi Realtime
                             </span>
-                            <p class="text-xs font-medium text-muted-foreground">{{ $label }}</p>
-                            <p class="mt-1 font-outfit text-xl font-extrabold tracking-tight {{ $tone }}">
-                                {{ $i === 3 ? number_format($value, 0, ',', '.').' Donatur' : rupiah_short($value) }}
+                            <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl font-jakarta">
+                                Laporan Keuangan Terbuka & Akuntabel
+                            </h2>
+                            <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                                Seluruh dana infaq, shadaqah, dan donasi masjid dicatat secara realtime dan dipublikasikan tanpa keraguan. Umat dapat memantau serta mengunduh laporan keuangan kapan saja.
                             </p>
                         </div>
-                    @endforeach
+                        <div class="mt-8">
+                            <a href="{{ route('transparansi') }}" wire:navigate>
+                                <x-ui.button icon="chart-pie" class="bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition-all">Lihat Laporan Transparan</x-ui.button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-px bg-border sm:grid-cols-2 lg:border-s lg:border-border">
+                        @foreach ([
+                            ['Pemasukan ' . now()->year, $income, 'trending-up', 'text-amber-600 dark:text-amber-400'],
+                            ['Pengeluaran ' . now()->year, $expense, 'trending-down', 'text-rose-600 dark:text-rose-400'],
+                            ['Saldo Kas Berjalan', $balance, 'wallet', 'text-amber-500'],
+                            ['Donatur Terdaftar', $campaigns->sum('donor_count'), 'users', 'text-foreground'],
+                        ] as $i => [$label, $value, $icon, $tone])
+                            <div class="bg-card p-6 flex flex-col justify-center">
+                                <span class="grid size-10 place-items-center rounded-xl bg-muted/60 mb-3">
+                                    <i data-lucide="{{ $icon }}" class="size-5 {{ $tone }}"></i>
+                                </span>
+                                <p class="text-xs font-medium text-muted-foreground">{{ $label }}</p>
+                                <p class="mt-1 font-outfit text-xl font-extrabold tracking-tight {{ $tone }}">
+                                    {{ $i === 3 ? number_format($value, 0, ',', '.').' Donatur' : rupiah_short($value) }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     {{-- ══════════════ AL-QURAN DIGITAL & E-LIBRARY ══════════════ --}}
-    <section class="border-t border-amber-700/30 bg-stone-950 bg-gradient-to-r from-stone-950 via-stone-900 to-amber-950 text-white py-8 sm:py-16 relative overflow-hidden bg-islamic-pattern">
+    <section class="border-t border-amber-700/30 bg-stone-950 bg-gradient-to-r from-stone-950 via-stone-900 to-amber-950 text-white py-10 sm:py-16 relative overflow-hidden bg-islamic-pattern">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
                 <div class="space-y-5">
@@ -513,7 +515,7 @@
     </section>
 
     {{-- ══════════════ LOKASI & PETA MASJID ══════════════ --}}
-    <section class="border-t border-border py-8 sm:py-16">
+    <section class="border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950 py-10 sm:py-16">
         <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div class="space-y-6">
                 <div>
