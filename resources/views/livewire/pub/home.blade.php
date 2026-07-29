@@ -16,122 +16,141 @@
                 linear-gradient(180deg, rgba(10,6,2,0.70) 0%, transparent 35%, rgba(12,8,4,0.95) 100%),
                 radial-gradient(ellipse 50% 50% at 20% 40%, rgba(217,119,6,0.18) 0%, transparent 70%);"></div>
 
-        {{-- MAIN CONTENT CONTAINER: Left aligned layout matching reference screenshot --}}
-        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-40">
-            <div class="max-w-2xl space-y-6">
+        {{-- MAIN CONTENT CONTAINER: 2-Column layout matching reference screenshot --}}
+        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-36">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
 
-                {{-- Arabic Verse Ornament --}}
-                <div class="space-y-1">
-                    <div class="flex items-center gap-3">
-                        <span class="h-px w-8 bg-amber-400/40"></span>
-                        <p class="font-amiri text-2xl sm:text-3xl text-amber-200/90 tracking-wide drop-shadow-md">
-                            إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
+                {{-- Left Content Column --}}
+                <div class="lg:col-span-7 space-y-6">
+
+                    {{-- Arabic Verse Ornament --}}
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <span class="h-px w-8 bg-amber-400/40"></span>
+                            <p class="font-amiri text-2xl sm:text-3xl text-amber-200/90 tracking-wide drop-shadow-md">
+                                إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
+                            </p>
+                            <span class="h-px w-8 bg-amber-400/40"></span>
+                        </div>
+                        <p class="text-[0.7rem] font-extrabold uppercase tracking-[0.25em] text-amber-400/80">
+                            QS. AT-TAUBAH : 18
                         </p>
-                        <span class="h-px w-8 bg-amber-400/40"></span>
-                    </div>
-                    <p class="text-[0.7rem] font-extrabold uppercase tracking-[0.25em] text-amber-400/80">
-                        QS. AT-TAUBAH : 18
-                    </p>
-                </div>
-
-                {{-- Hero Mosque Title & Subtitle --}}
-                <div>
-                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-lg">
-                        Masjid Jami’<br />
-                        <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
-                            Al-Ikhlash
-                        </span>
-                    </h1>
-                    <p class="mt-3 text-sm sm:text-base text-stone-200/90 font-medium leading-relaxed max-w-lg">
-                        Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
-                        <span class="text-amber-400 font-bold">Kerten, Laweyan, Surakarta.</span>
-                    </p>
-                </div>
-
-                {{-- 4 Stat Cards Grid --}}
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
-                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                        <div class="flex items-center gap-2 text-amber-400 mb-1">
-                            <i data-lucide="users" class="size-4 shrink-0"></i>
-                            <span class="font-outfit text-base font-black text-white">950+</span>
-                        </div>
-                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
                     </div>
 
-                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                        <div class="flex items-center gap-2 text-amber-400 mb-1">
-                            <i data-lucide="book-open" class="size-4 shrink-0"></i>
-                            <span class="font-outfit text-base font-black text-white">12</span>
-                        </div>
-                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
-                    </div>
-
-                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                        <div class="flex items-center gap-2 text-amber-400 mb-1">
-                            <i data-lucide="heart" class="size-4 shrink-0"></i>
-                            <span class="font-outfit text-base font-black text-white">Rp 18jt+</span>
-                        </div>
-                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
-                    </div>
-
-                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                        <div class="flex items-center gap-2 text-amber-400 mb-1">
-                            <i data-lucide="user-check" class="size-4 shrink-0"></i>
-                            <span class="font-outfit text-base font-black text-white">25</span>
-                        </div>
-                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
-                    </div>
-                </div>
-
-                {{-- Action Pill Buttons Row --}}
-                <div class="flex flex-wrap items-center gap-2 pt-2">
-                    <a href="{{ route('donasi') }}" wire:navigate
-                       class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-5 py-2.5 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
-                        <i data-lucide="hand-heart" class="size-4"></i>
-                        <span>Donasi Sekarang</span>
-                    </a>
-
-                    <a href="{{ route('kajian') }}" wire:navigate
-                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                        <i data-lucide="book-open" class="size-4 text-amber-400"></i>
-                        <span>Jadwal Kajian</span>
-                    </a>
-
-                    <a href="{{ route('live') }}" wire:navigate
-                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                        <i data-lucide="radio" class="size-4 text-amber-400"></i>
-                        <span>Live Streaming</span>
-                    </a>
-
-                    <a href="{{ route('imam') }}" wire:navigate
-                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                        <i data-lucide="user-check" class="size-4 text-amber-400"></i>
-                        <span>Jadwal Imam</span>
-                    </a>
-
-                    <a href="{{ route('kiblat') }}" wire:navigate
-                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                        <i data-lucide="compass" class="size-4 text-amber-400"></i>
-                        <span>Arah Kiblat</span>
-                    </a>
-                </div>
-
-                {{-- Floating Live Kajian Card (Matching Bottom Left Box in Reference) --}}
-                <div class="rounded-2xl border border-amber-500/30 bg-stone-950/75 p-4 backdrop-blur-xl shadow-2xl max-w-sm space-y-2 mt-4">
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-500/20 border border-rose-500/30 px-2.5 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-rose-400">
-                            <span class="size-1.5 rounded-full bg-rose-500 animate-ping"></span>
-                            Live Kajian
-                        </span>
-                        <span class="inline-flex items-center gap-1 text-[0.65rem] font-bold text-emerald-400">
-                            <span class="size-1.5 rounded-full bg-emerald-400"></span> 150 Jamaah Online
-                        </span>
-                    </div>
+                    {{-- Hero Mosque Title & Subtitle --}}
                     <div>
-                        <p class="font-extrabold text-sm text-white font-jakarta">Kitab Riyadhus Shalihin</p>
-                        <p class="text-xs text-stone-300 font-medium mt-0.5 flex items-center gap-1">
-                            <i data-lucide="user" class="size-3 text-amber-400"></i> Ust. Abu Hurairah, Lc.
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-lg">
+                            Masjid Jami’<br />
+                            <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
+                                Al-Ikhlash
+                            </span>
+                        </h1>
+                        <p class="mt-3 text-sm sm:text-base text-stone-200/90 font-medium leading-relaxed max-w-lg">
+                            Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
+                            <span class="text-amber-400 font-bold">Kelurahan Kerten, Laweyan, Surakarta.</span>
                         </p>
+                    </div>
+
+                    {{-- 4 Stat Cards Grid --}}
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
+                        <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                            <div class="flex items-center gap-2 text-amber-400 mb-1">
+                                <i data-lucide="users" class="size-4 shrink-0"></i>
+                                <span class="font-outfit text-base font-black text-white">950+</span>
+                            </div>
+                            <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
+                        </div>
+
+                        <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                            <div class="flex items-center gap-2 text-amber-400 mb-1">
+                                <i data-lucide="book-open" class="size-4 shrink-0"></i>
+                                <span class="font-outfit text-base font-black text-white">12</span>
+                            </div>
+                            <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
+                        </div>
+
+                        <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                            <div class="flex items-center gap-2 text-amber-400 mb-1">
+                                <i data-lucide="heart" class="size-4 shrink-0"></i>
+                                <span class="font-outfit text-base font-black text-white">Rp 18jt+</span>
+                            </div>
+                            <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
+                        </div>
+
+                        <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                            <div class="flex items-center gap-2 text-amber-400 mb-1">
+                                <i data-lucide="user-check" class="size-4 shrink-0"></i>
+                                <span class="font-outfit text-base font-black text-white">25</span>
+                            </div>
+                            <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
+                        </div>
+                    </div>
+
+                    {{-- Action Pill Buttons Row --}}
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <a href="{{ route('donasi') }}" wire:navigate
+                           class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-5.5 py-2.5 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
+                            <i data-lucide="hand-heart" class="size-4"></i>
+                            <span>Donasi Sekarang</span>
+                            <i data-lucide="arrow-right" class="size-3.5 ms-0.5"></i>
+                        </a>
+
+                        <a href="{{ route('kajian') }}" wire:navigate
+                           class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                            <i data-lucide="book-open" class="size-4 text-amber-400"></i>
+                            <span>Jadwal Kajian</span>
+                        </a>
+
+                        <a href="{{ route('live') }}" wire:navigate
+                           class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                            <i data-lucide="radio" class="size-4 text-amber-400"></i>
+                            <span>Live Streaming</span>
+                        </a>
+
+                        <a href="{{ route('imam') }}" wire:navigate
+                           class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                            <i data-lucide="user-check" class="size-4 text-amber-400"></i>
+                            <span>Jadwal Imam</span>
+                        </a>
+
+                        <a href="{{ route('kiblat') }}" wire:navigate
+                           class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                            <i data-lucide="compass" class="size-4 text-amber-400"></i>
+                            <span>Arah Kiblat</span>
+                        </a>
+                    </div>
+                </div>
+
+                {{-- Right Column: Mosque Arch Graphic + Floating Live Kajian Box --}}
+                <div class="lg:col-span-5 relative mt-6 lg:mt-0 flex justify-center lg:justify-end">
+                    <div class="relative w-full max-w-md group">
+                        {{-- Mosque Arch Container --}}
+                        <div class="overflow-hidden rounded-[2.5rem] border-2 border-amber-500/30 bg-stone-950 shadow-2xl relative aspect-[4/4.8]">
+                            <img src="{{ asset('images/mosque-arch.png') }}" alt="Masjid Al-Ikhlash" class="size-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/40"></div>
+                        </div>
+
+                        {{-- Floating Live Kajian Card positioned on the lower right of the Arch --}}
+                        <div class="absolute -bottom-6 -start-4 sm:-start-6 z-20 w-[90%] sm:w-80 rounded-3xl border border-amber-500/40 bg-stone-950/90 p-4.5 backdrop-blur-xl shadow-2xl space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-emerald-400">
+                                    <span class="size-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                    LIVE
+                                </span>
+                                <span class="text-[0.68rem] text-stone-400 font-medium">Kajian Rutin Malam Ini</span>
+                            </div>
+                            <div>
+                                <p class="font-extrabold text-sm text-white font-jakarta">Kitab Riyadhus Shalihin</p>
+                                <p class="text-xs text-stone-300 font-medium mt-0.5 flex items-center gap-1">
+                                    <i data-lucide="user" class="size-3 text-amber-400"></i> Ust. Abu Hurairah, Lc.
+                                </p>
+                            </div>
+                            <div class="border-t border-white/10 pt-2 flex items-center justify-between text-[0.68rem] text-stone-400 font-medium">
+                                <span class="flex items-center gap-1 text-emerald-400 font-bold">
+                                    <span class="size-1.5 rounded-full bg-emerald-400"></span> 150 Jamaah Online
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
