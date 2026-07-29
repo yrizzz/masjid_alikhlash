@@ -102,7 +102,7 @@
                 <a href="{{ route('donasi') }}" wire:navigate
                    class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-4 sm:px-6 py-2 sm:py-3 text-[0.75rem] sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
                     <i data-lucide="hand-heart" class="size-3.5 sm:size-4"></i>
-                    <span>Donasi Sekarang</span>
+                    <span>Donasi Berpahala</span>
                     <i data-lucide="arrow-right" class="size-3 sm:size-3.5 ms-0.5"></i>
                 </a>
 
@@ -146,8 +146,8 @@
 
         {{-- ═══ PRAYER TIME FLOATING BAR — EXACT MATCH BOTTOM BAR ═══ --}}
         <div class="relative z-20 w-full border-t border-amber-500/20 bg-stone-950/90 backdrop-blur-2xl py-3 shadow-2xl">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+            <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
 
                     {{-- Left Date Card --}}
                     <div class="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-4 py-2.5 text-xs text-white shrink-0 w-full lg:w-auto">
@@ -160,19 +160,19 @@
                         </div>
                     </div>
 
-                    {{-- Prayer Times Columns --}}
-                    <div class="flex flex-1 items-center justify-between gap-2 overflow-x-auto w-full py-1 scrollbar-none px-2">
+                    {{-- Prayer Times 5-Column Grid (No Horizontal Scroll Needed) --}}
+                    <div class="grid grid-cols-5 gap-1 sm:gap-2 w-full flex-1 py-1 px-1 sm:px-2">
                         @foreach ($prayer['times'] as $key => $time)
                             @php $isActive = $prayer['current'] === $key; @endphp
-                            <div class="flex-1 min-w-[5.5rem] rounded-xl px-3 py-2 text-center transition-all {{ $isActive ? 'bg-amber-500/20 border border-amber-500/40 shadow-lg' : 'bg-transparent' }}">
-                                <p class="text-[0.65rem] font-extrabold uppercase tracking-wider {{ $isActive ? 'text-amber-300' : 'text-stone-400' }}">
+                            <div class="rounded-xl px-1 sm:px-3 py-1.5 sm:py-2 text-center transition-all {{ $isActive ? 'bg-amber-500/20 border border-amber-500/40 shadow-lg' : 'bg-white/5 border border-transparent' }}">
+                                <p class="text-[0.55rem] sm:text-[0.65rem] font-extrabold uppercase tracking-tight sm:tracking-wider {{ $isActive ? 'text-amber-300' : 'text-stone-400' }}">
                                     {{ \App\Services\PrayerTimeService::PRAYERS[$key] }}
                                 </p>
-                                <p class="font-outfit text-base font-extrabold tabular-nums {{ $isActive ? 'text-white' : 'text-stone-200' }}">
+                                <p class="font-outfit text-xs sm:text-base font-extrabold tabular-nums {{ $isActive ? 'text-white' : 'text-stone-200' }}">
                                     {{ $time->format('H:i') }}
                                 </p>
                                 @if ($isActive)
-                                    <p class="text-[0.58rem] font-bold text-amber-400 uppercase tracking-tight mt-0.5">Sedang Berlangsung</p>
+                                    <p class="text-[0.5rem] sm:text-[0.58rem] font-bold text-amber-400 uppercase tracking-tight mt-0.5 truncate">Berlangsung</p>
                                 @endif
                             </div>
                         @endforeach
