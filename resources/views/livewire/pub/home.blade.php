@@ -28,21 +28,30 @@
                 </p>
             </div>
 
-            {{-- Hijri date badge --}}
-            <div class="inline-flex items-center gap-2 rounded-full bg-stone-950/70 border border-amber-400/40 px-3.5 py-1 text-[0.7rem] sm:text-xs font-semibold text-amber-200 shadow-xl backdrop-blur-xl mb-4">
-                <span class="relative flex size-2">
-                    <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-                    <span class="relative inline-flex size-2 rounded-full bg-amber-400"></span>
-                </span>
-                <i data-lucide="moon-star" class="size-3.5 text-amber-300"></i>
-                <span>{{ $hijri['day_name'] }}, {{ $hijri['formatted'] }}</span>
-                @if ($holiday)
-                    <span class="border-s border-amber-400/40 ps-2 text-amber-300 font-bold">{{ $holiday }}</span>
-                @endif
+            {{-- Hijri date badge & Live Prayer Countdown Pill --}}
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+                <div class="inline-flex items-center gap-2 rounded-full bg-stone-950/80 border border-amber-400/40 px-3.5 py-1 text-[0.7rem] sm:text-xs font-semibold text-amber-200 shadow-xl backdrop-blur-xl">
+                    <span class="relative flex size-2">
+                        <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex size-2 rounded-full bg-amber-400"></span>
+                    </span>
+                    <i data-lucide="moon-star" class="size-3.5 text-amber-300"></i>
+                    <span>{{ $hijri['day_name'] }}, {{ $hijri['formatted'] }}</span>
+                    @if ($holiday)
+                        <span class="border-s border-amber-400/40 ps-2 text-amber-300 font-bold">{{ $holiday }}</span>
+                    @endif
+                </div>
+
+                {{-- Interactive Live Countdown Pill --}}
+                <div x-data="countdown({{ $prayer['seconds_left'] }})" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500/20 via-stone-950/80 to-amber-600/20 border border-amber-400/50 px-3.5 py-1 text-[0.7rem] sm:text-xs font-bold text-amber-300 shadow-xl backdrop-blur-xl">
+                    <i data-lucide="timer" class="size-3.5 text-amber-400 animate-pulse"></i>
+                    <span>Menuju <strong class="text-white uppercase">{{ $prayer['next_label'] }}</strong>:</span>
+                    <span class="font-outfit text-white font-extrabold tracking-widest tabular-nums bg-amber-500/20 px-2 py-0.5 rounded-full border border-amber-400/30" x-text="parts.h + ':' + parts.m + ':' + parts.s"></span>
+                </div>
             </div>
 
             {{-- Mosque name & tagline --}}
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-xl max-w-3xl mx-auto">
                 Masjid Jami’<br />
                 <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
                     Al-Ikhlash
@@ -54,70 +63,70 @@
             </p>
 
             {{-- 4 Stat Cards Grid --}}
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full max-w-2xl mt-5 sm:mt-6">
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
-                        <i data-lucide="users" class="size-3.5 shrink-0"></i>
-                        <span class="font-outfit text-sm sm:text-base font-black text-white">950+</span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3 w-full max-w-2xl mt-4 sm:mt-6">
+                <div class="rounded-xl sm:rounded-2xl border border-white/15 bg-stone-950/65 p-2 sm:p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1 text-amber-400 mb-0.5">
+                        <i data-lucide="users" class="size-3 sm:size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-xs sm:text-base font-black text-white">950+</span>
                     </div>
-                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
-                        <i data-lucide="book-open" class="size-3.5 shrink-0"></i>
-                        <span class="font-outfit text-sm sm:text-base font-black text-white">12</span>
+                <div class="rounded-xl sm:rounded-2xl border border-white/15 bg-stone-950/65 p-2 sm:p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1 text-amber-400 mb-0.5">
+                        <i data-lucide="book-open" class="size-3 sm:size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-xs sm:text-base font-black text-white">12</span>
                     </div>
-                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
-                        <i data-lucide="heart" class="size-3.5 shrink-0"></i>
-                        <span class="font-outfit text-sm sm:text-base font-black text-white">Rp 18jt+</span>
+                <div class="rounded-xl sm:rounded-2xl border border-white/15 bg-stone-950/65 p-2 sm:p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1 text-amber-400 mb-0.5">
+                        <i data-lucide="heart" class="size-3 sm:size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-xs sm:text-base font-black text-white">Rp 18jt+</span>
                     </div>
-                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
                 </div>
 
-                <div class="rounded-2xl border border-white/15 bg-stone-950/65 p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
-                    <div class="flex items-center justify-center gap-1.5 text-amber-400 mb-0.5">
-                        <i data-lucide="user-check" class="size-3.5 shrink-0"></i>
-                        <span class="font-outfit text-base font-black text-white">25</span>
+                <div class="rounded-xl sm:rounded-2xl border border-white/15 bg-stone-950/65 p-2 sm:p-3 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                    <div class="flex items-center justify-center gap-1 text-amber-400 mb-0.5">
+                        <i data-lucide="user-check" class="size-3 sm:size-3.5 shrink-0"></i>
+                        <span class="font-outfit text-xs sm:text-base font-black text-white">25</span>
                     </div>
-                    <p class="text-[0.65rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
                 </div>
             </div>
 
             {{-- Action Pill Buttons Row --}}
-            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mt-5 sm:mt-6">
+            <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 mt-4 sm:mt-6">
                 <a href="{{ route('donasi') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
-                    <i data-lucide="hand-heart" class="size-4"></i>
+                   class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-4 sm:px-6 py-2 sm:py-3 text-[0.75rem] sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
+                    <i data-lucide="hand-heart" class="size-3.5 sm:size-4"></i>
                     <span>Donasi Sekarang</span>
-                    <i data-lucide="arrow-right" class="size-3.5 ms-0.5"></i>
+                    <i data-lucide="arrow-right" class="size-3 sm:size-3.5 ms-0.5"></i>
                 </a>
 
                 <a href="{{ route('kajian') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                    <i data-lucide="book-open" class="size-4 text-amber-400"></i>
+                   class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-stone-950/65 px-3 sm:px-4 py-1.5 sm:py-3 text-[0.7rem] sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                    <i data-lucide="book-open" class="size-3.5 sm:size-4 text-amber-400"></i>
                     <span>Jadwal Kajian</span>
                 </a>
 
                 <a href="{{ route('live') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                    <i data-lucide="radio" class="size-4 text-amber-400"></i>
+                   class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-stone-950/65 px-3 sm:px-4 py-1.5 sm:py-3 text-[0.7rem] sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                    <i data-lucide="radio" class="size-3.5 sm:size-4 text-amber-400"></i>
                     <span>Live Streaming</span>
                 </a>
 
                 <a href="{{ route('imam') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                    <i data-lucide="user-check" class="size-4 text-amber-400"></i>
+                   class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-stone-950/65 px-3 sm:px-4 py-1.5 sm:py-3 text-[0.7rem] sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                    <i data-lucide="user-check" class="size-3.5 sm:size-4 text-amber-400"></i>
                     <span>Jadwal Imam</span>
                 </a>
 
                 <a href="{{ route('kiblat') }}" wire:navigate
-                   class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/65 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
-                    <i data-lucide="compass" class="size-4 text-amber-400"></i>
+                   class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-stone-950/65 px-3 sm:px-4 py-1.5 sm:py-3 text-[0.7rem] sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                    <i data-lucide="compass" class="size-3.5 sm:size-4 text-amber-400"></i>
                     <span>Arah Kiblat</span>
                 </a>
             </div>
@@ -169,15 +178,18 @@
                         @endforeach
                     </div>
 
-                    {{-- Right Countdown Box with Circular/Gauge Indicator --}}
-                    <div x-data="countdown({{ $prayer['seconds_left'] }})" class="flex items-center gap-3 rounded-2xl bg-amber-500/15 border border-amber-500/30 px-4 py-2 shrink-0 w-full lg:w-auto justify-between lg:justify-start">
+                    {{-- Right Countdown Box with Dynamic Ticking Timer --}}
+                    <div x-data="countdown({{ $prayer['seconds_left'] }})" class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-600/10 to-transparent border border-amber-500/40 px-4 py-2 shrink-0 w-full lg:w-auto justify-between lg:justify-start shadow-inner">
                         <div>
-                            <p class="text-[0.65rem] font-bold uppercase tracking-wider text-amber-400/80">Menuju {{ $prayer['next_label'] }}</p>
-                            <p class="font-outfit text-base font-extrabold tabular-nums text-white" x-text="formatted"></p>
-                            <p class="text-[0.68rem] text-stone-300 font-medium" x-text="subtext"></p>
+                            <p class="text-[0.65rem] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                                <span class="size-1.5 rounded-full bg-amber-400 animate-ping"></span>
+                                Menuju {{ $prayer['next_label'] }}
+                            </p>
+                            <p class="font-outfit text-lg font-black tabular-nums text-white tracking-wider" x-text="parts.h + ':' + parts.m + ':' + parts.s"></p>
+                            <p class="text-[0.68rem] text-amber-200/80 font-semibold" x-text="'-' + parts.h + 'j ' + parts.m + 'm ' + parts.s + 'd'"></p>
                         </div>
-                        <div class="relative size-10 grid place-items-center rounded-full bg-stone-900 border border-amber-400/40 text-amber-400">
-                            <i data-lucide="clock" class="size-5 animate-pulse"></i>
+                        <div class="relative size-10 grid place-items-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-stone-950 font-black shadow-lg">
+                            <i data-lucide="alarm-clock" class="size-5 animate-pulse"></i>
                         </div>
                     </div>
 
