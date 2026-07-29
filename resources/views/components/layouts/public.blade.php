@@ -63,15 +63,25 @@
     @livewireScripts
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        function triggerHeroAnimations() {
+            document.querySelectorAll('.hero-animate').forEach(function (el) {
+                el.style.animation = 'none';
+                el.offsetHeight; // reflow
+                el.style.animation = '';
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {
                 AOS.init({ duration: 750, once: true, easing: 'ease-out-cubic' });
             }
+            triggerHeroAnimations();
         });
         document.addEventListener('livewire:navigated', function () {
             if (typeof AOS !== 'undefined') {
                 AOS.refreshHard();
             }
+            triggerHeroAnimations();
         });
     </script>
     @stack('scripts')
