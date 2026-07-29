@@ -215,8 +215,8 @@
                     ['UMKM Jamaah', 'store', 'umkm', 'Ekonomi Umat'],
                 ] as $idx => [$label, $icon, $r, $sub])
                     <a href="{{ route($r) }}" wire:navigate
-                       data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}"
-                       class="group flex flex-col items-center gap-2 rounded-2xl bg-white dark:bg-[#251e18] p-4 text-center card-transition hover:bg-amber-500/10 dark:hover:bg-[#2e251e] shadow-sm hover:shadow-md border border-stone-200/80 dark:border-amber-900/30">
+                       class="scroll-animate group flex flex-col items-center gap-2 rounded-2xl bg-white dark:bg-[#251e18] p-4 text-center card-transition hover:bg-amber-500/10 dark:hover:bg-[#2e251e] shadow-sm hover:shadow-md border border-stone-200/80 dark:border-amber-900/30"
+                       data-scroll-delay="{{ $idx * 60 }}">
                         <span class="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-amber-600/15 via-stone-500/10 to-amber-900/20 text-amber-700 dark:text-amber-400 group-hover:bg-gradient-to-br group-hover:from-amber-600 group-hover:to-amber-800 group-hover:text-white transition-all shadow-sm">
                             <i data-lucide="{{ $icon }}" class="size-6"></i>
                         </span>
@@ -281,8 +281,8 @@
                     <div class="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-3 w-full min-w-0">
                         @forelse ($kajians as $k)
                             <a href="{{ route('kajian.show', $k) }}" wire:navigate
-                               data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}"
-                               class="group overflow-hidden rounded-2xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md w-full">
+                               class="scroll-animate group overflow-hidden rounded-2xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md w-full"
+                               data-scroll-delay="{{ $loop->index * 80 }}">
                                 <div class="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-stone-900/20 relative">
                                     <img src="{{ img_url($k->poster, $k->slug) }}" alt="{{ $k->title }}"
                                          class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -307,7 +307,7 @@
                 </div>
 
                 {{-- Kanan: Khutbah Jumat & Agenda --}}
-                <div class="w-full min-w-0 space-y-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="scroll-animate w-full min-w-0 space-y-6" data-scroll-delay="150">
                     @if ($jumat)
                         <div class="relative overflow-hidden rounded-3xl bg-[#1c1511] text-white p-5 sm:p-7 shadow-2xl flex flex-col items-center justify-center text-center">
                             {{-- Dark background layers --}}
@@ -413,8 +413,8 @@
                 <div class="mt-8 grid gap-6 md:grid-cols-3">
                     @foreach ($campaigns as $c)
                         <a href="{{ route('donasi.show', $c) }}" wire:navigate
-                           data-aos="fade-up" data-aos-delay="{{ $loop->index * 90 }}"
-                           class="group overflow-hidden rounded-3xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md">
+                           class="scroll-animate group overflow-hidden rounded-3xl bg-white dark:bg-[#251e18] card-transition shadow-sm hover:shadow-md"
+                           data-scroll-delay="{{ $loop->index * 90 }}">
                             <div class="relative aspect-[16/10] overflow-hidden bg-stone-900/20">
                                 <img src="{{ img_url($c->cover, $c->slug) }}" alt="{{ $c->title }}"
                                      class="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -447,7 +447,7 @@
 
     {{-- ══════════════ TRANSPARANSI KEUANGAN REALTIME ══════════════ --}}
     <section class="w-full bg-stone-50/90 dark:bg-[#140e0b]/90 border-b border-stone-200/80 dark:border-amber-800/50 py-10 sm:py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+        <div class="scroll-animate mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="overflow-hidden rounded-3xl border border-stone-200 dark:border-amber-700/40 bg-white dark:bg-[#221b16] shadow-xl bg-islamic-pattern card-transition">
                 <div class="grid lg:grid-cols-[1fr_1.1fr]">
                     <div class="p-8 sm:p-10 flex flex-col justify-between">
@@ -496,7 +496,7 @@
 
     {{-- ══════════════ AL-QURAN DIGITAL & E-LIBRARY ══════════════ --}}
     <section class="border-b border-stone-200 dark:border-amber-800/50 bg-[#1a130f] bg-gradient-to-r from-[#1a130f] via-[#241a14] to-[#2d1f16] text-white py-10 sm:py-16 relative overflow-hidden bg-islamic-pattern">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+        <div class="scroll-animate mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
                 <div class="space-y-5">
                     <span class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 border border-amber-500/30">
@@ -536,7 +536,7 @@
 
     {{-- ══════════════ LOKASI & PETA MASJID ══════════════ --}}
     <section class="border-b border-stone-200 dark:border-amber-800/50 bg-white dark:bg-[#18120e] py-10 sm:py-16">
-        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8" data-aos="fade-up">
+        <div class="scroll-animate mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div class="space-y-6">
                 <div>
                     <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">

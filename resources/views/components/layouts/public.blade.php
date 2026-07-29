@@ -43,7 +43,31 @@
         })();
     </script>
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        function triggerHeroAnimations() {
+            document.querySelectorAll('.hero-animate').forEach(function (el) {
+                el.classList.remove('hero-animate');
+                void el.offsetWidth; // force reflow
+                el.classList.add('hero-animate');
+            });
+        }
+
+        function initScrollAnimations() {
+            var els = document.querySelectorAll('.scroll-animate');
+            if (!els.length) return;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        var delay = el.dataset.scrollDelay || 0;
+                        setTimeout(function () { el.classList.add('is-visible'); }, parseInt(delay));
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(function (el) { observer.observe(el); });
+        }
+    </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -61,29 +85,20 @@
 
     <x-ui.toaster />
     @livewireScripts
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        function triggerHeroAnimations() {
-            document.querySelectorAll('.hero-animate').forEach(function (el) {
-                el.classList.remove('hero-animate');
-                void el.offsetWidth; // force reflow
-                el.classList.add('hero-animate');
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
-            if (typeof AOS !== 'undefined') {
-                AOS.init({ duration: 750, once: true, easing: 'ease-out-cubic' });
-            }
             triggerHeroAnimations();
+            initScrollAnimations();
         });
         document.addEventListener('livewire:navigated', function () {
-            if (typeof AOS !== 'undefined') {
-                AOS.refreshHard();
-            }
+            document.querySelectorAll('.scroll-animate').forEach(function(el) {
+                el.classList.remove('is-visible');
+            });
             triggerHeroAnimations();
+            initScrollAnimations();
         });
     </script>
     @stack('scripts')
 </body>
 </html>
+
