@@ -558,7 +558,11 @@
                 </dl>
 
                 <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
-                    <x-ui.button :href="config('masjid.maps_url')" target="_blank" icon="map-pin" class="w-full justify-center bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs sm:text-sm px-2 sm:px-4">Buka Google Maps</x-ui.button>
+                    <a href="{{ config('masjid.maps_url') }}" target="_blank"
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-[.98] px-4 h-10 text-xs sm:text-sm font-bold text-stone-950 shadow-sm transition-all">
+                        <i data-lucide="map-pin" class="size-4 shrink-0"></i>
+                        Buka Google Maps
+                    </a>
                     <x-ui.button variant="outline" :href="route('kontak')" icon="mail" class="w-full justify-center rounded-xl text-xs sm:text-sm px-2 sm:px-4">Hubungi Pengurus</x-ui.button>
                 </div>
             </div>
