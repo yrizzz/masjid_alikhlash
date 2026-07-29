@@ -1,0 +1,23 @@
+{
+    "name": "Masjid Al-Ikhlash Kerten",
+    "short_name": "Al-Ikhlash",
+    "description": "Pusat digital ibadah, ilmu, dan sosial jamaah Masjid Al-Ikhlash Kerten, Surakarta.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0b1a19",
+    "theme_color": "#0f766e",
+    "lang": "id",
+    "icons": [
+        { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+        { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+        { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    ],
+    "shortcuts": [
+        { "name": "Jadwal Sholat", "url": "/jadwal-sholat" },
+        { "name": "Donasi", "url": "/donasi" },
+        { "name": "Kajian", "url": "/kajian" },
+        { "name": "Arah Kiblat", "url": "/arah-kiblat" }
+    ]
+}

@@ -1,0 +1,88 @@
+@php($cfg = config('adminkit'))
+
+{{-- Mobile backdrop --}}
+<div x-show="$store.ui.sidebarMobileOpen" x-cloak x-transition.opacity
+     @click="$store.ui.closeMobileSidebar()"
+     class="fixed inset-0 z-40 bg-black/50 lg:hidden"></div>
+
+<aside
+    x-data="{ hovering: false }"
+    data-sidebar-color="{{ $_COOKIE['ak_sb_color'] ?? 'dark' }}"
+    :data-sidebar-color="$store.ui.sidebarColor"
+    @mouseenter="hovering = true" @mouseleave="hovering = false"
+    class="main-sidebar fixed inset-y-0 start-0 z-50 flex w-64 flex-col text-sidebar-foreground shadow-xl transition-[transform,width] duration-200 ease-in-out lg:shadow-none"
+    :class="[
+        $store.ui.sidebarMobileOpen ? 'translate-x-0' : 'max-lg:ltr:-translate-x-full max-lg:rtl:translate-x-full',
+        ($store.ui.sidebarCollapsed && !hovering) ? 'lg:w-[76px] is-rail' : 'lg:w-64',
+        $store.ui.layout === 'horizontal' ? 'lg:hidden' : ''
+    ]"
+>
+    {{-- Brand --}}
+    <div class="sidebar-brand flex h-16 items-center gap-2.5 px-4">
+        <a href="{{ route('admin.dashboard') }}" wire:navigate class="flex items-center gap-2.5 overflow-hidden">
+            <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-sidebar-primary text-white shadow-lg shadow-sidebar-primary/30">
+                <i data-lucide="moon-star" class="size-5"></i>
+            </span>
+            <span class="sidebar-brand-text text-lg font-bold tracking-tight text-sidebar-foreground">{{ $cfg['name'] }}</span>
+        </a>
+        <button type="button" @click="$store.ui.toggleSidebar()"
+                class="sidebar-brand-text ms-auto hidden rounded-lg p-1.5 text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground lg:block">
+            <i data-lucide="chevrons-left" class="size-5 transition-transform duration-200" :class="{ 'rotate-180': $store.ui.sidebarCollapsed }"></i>
+        </button>
+        <button type="button" @click="$store.ui.closeMobileSidebar()"
+                class="ms-auto rounded-lg p-1.5 text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden">
+            <i data-lucide="x" class="size-5"></i>
+        </button>
+    </div>
+
+    {{-- Search + Nav --}}
+    <div class="flex flex-1 flex-col overflow-hidden px-3 pb-2" x-data="{
+        q: '',
+        filter() {
+            const term = this.q.toLowerCase().trim();
+            const nav = this.$refs.nav;
+            nav.classList.toggle('is-searching', term.length > 0);
+            nav.querySelectorAll('li').forEach(li => {
+                li.style.display = (!term || li.textContent.toLowerCase().includes(term)) ? '' : 'none';
+            });
+        }
+    }">
+        <div class="sidebar-search relative">
+            <i data-lucide="search" class="pointer-events-none absolute inset-y-0 start-0 my-auto ms-3 size-4 text-sidebar-muted"></i>
+            <input x-model="q" @input="filter()" type="text" placeholder="Cari menu…"
+                   class="h-9 w-full rounded-lg border border-sidebar-border bg-sidebar-accent/50 ps-9 pe-3 text-sm text-sidebar-foreground placeholder:text-sidebar-muted focus:border-sidebar-primary/50 focus:outline-none focus:ring-1 focus:ring-sidebar-primary/40" />
+        </div>
+
+        <nav x-ref="nav" class="scrollbar-sidebar -mx-1 mt-1 flex-1 space-y-0.5 overflow-y-auto px-1">
+            @foreach ($cfg['menu'] as $group)
+                <p class="nav-group-label">{{ $group['group'] }}</p>
+                <ul class="space-y-0.5">
+                    @foreach ($group['items'] as $item)
+                        @include('partials.menu-item', ['item' => $item, 'level' => 0])
+                    @endforeach
+                </ul>
+            @endforeach
+            <div class="h-4"></div>
+        </nav>
+    </div>
+
+    {{-- User card --}}
+    <div class="mt-auto border-t border-sidebar-border p-3">
+        <div class="flex items-center gap-1">
+            <a href="{{ route('admin.settings') }}" wire:navigate class="sidebar-usercard flex flex-1 items-center gap-3 rounded-xl p-2 transition-colors hover:bg-sidebar-accent">
+                <x-ui.avatar :name="auth()->user()?->name ?? 'Pengurus'" size="sm" status="online" />
+                <div class="sidebar-usercard-text min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold text-sidebar-foreground">{{ auth()->user()?->name ?? 'Pengurus' }}</p>
+                    <p class="truncate text-xs text-sidebar-muted">{{ auth()->user()?->email ?? '—' }}</p>
+                </div>
+            </a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" title="Keluar" class="sidebar-usercard-text rounded-lg p-2 text-sidebar-muted hover:bg-sidebar-accent hover:text-destructive">
+                    <i data-lucide="log-out" class="size-4"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</aside>
+

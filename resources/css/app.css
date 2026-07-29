@@ -1,0 +1,1680 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views';
+
+/* Safelist chart/data colors used by dashboards (dynamic class fragments) */
+@source inline("{bg,text,border}-chart-{1,2,3,4,5}");
+@source inline("bg-chart-{1,2,3,4,5}/{10,15,20,25}");
+
+/* ============================================================
+   Laravel Admin Kit — Design System (Shadcn-inspired)
+   Tokens are HSL channels so accent/theme can swap at runtime.
+   ============================================================ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    /* radius scale (PRD: sm6 md8 lg12 xl16 2xl20) driven by --radius */
+    --radius: 0.65rem;
+
+    /* --- Light theme --- */
+    --background: 0 0% 100%;
+    --foreground: 222 24% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 24% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 24% 12%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 24% 20%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 24% 20%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
+
+    --chart-1: 221 83% 53%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Sidebar (dark rail — matches the requested design even in light mode) */
+    --sidebar: 222 32% 11%;
+    --sidebar-foreground: 220 14% 75%;
+    --sidebar-muted: 220 10% 46%;
+    --sidebar-border: 222 24% 18%;
+    --sidebar-accent: 222 26% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-primary: 221 83% 60%;
+}
+
+.dark {
+    --background: 222 47% 7%;
+    --foreground: 213 31% 91%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 221 83% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 217 33% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 213 31% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 221 83% 60%;
+
+    --sidebar: 222 47% 11%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-muted: 215 16% 47%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-primary: var(--primary);
+}
+
+/* --- Accent color presets (swap --primary + --ring + --sidebar-primary at runtime) --- */
+[data-accent='blue']   { --primary: 221 83% 53%; --ring: 221 83% 53%; --sidebar-primary: 221 83% 53%; }
+[data-accent='violet'] { --primary: 262 83% 58%; --ring: 262 83% 58%; --sidebar-primary: 262 83% 58%; }
+[data-accent='green']  { --primary: 142 71% 45%; --ring: 142 71% 45%; --sidebar-primary: 142 71% 45%; --primary-foreground: 0 0% 100%; }
+[data-accent='rose']   { --primary: 347 77% 50%; --ring: 347 77% 50%; --sidebar-primary: 347 77% 50%; }
+[data-accent='orange'] { --primary: 25 95% 53%;  --ring: 25 95% 53%;  --sidebar-primary: 25 95% 53%; }
+[data-accent='amber']  { --primary: 38 92% 50%;  --ring: 38 92% 50%;  --sidebar-primary: 38 92% 50%; --primary-foreground: 26 40% 12%; }
+[data-accent='teal']   { --primary: 173 80% 40%; --ring: 173 80% 40%; --sidebar-primary: 173 80% 40%; }
+
+/* --- Radius presets --- */
+[data-radius='none'] { --radius: 0rem; }
+[data-radius='sm']   { --radius: 0.375rem; }
+[data-radius='md']   { --radius: 0.5rem; }
+[data-radius='lg']   { --radius: 0.65rem; }
+[data-radius='xl']   { --radius: 1rem; }
+
+/* ============================================================
+   SIDEBAR COLOR & BACKGROUND IMAGE OVERRIDES (Main Sidebar Only)
+   ============================================================ */
+
+/* Main sidebar is STAY DARK (#0f172a) by default in both Light & Dark modes */
+aside.main-sidebar {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+    --sidebar: 222 32% 11%;
+    --sidebar-foreground: 220 14% 75%;
+    --sidebar-muted: 220 10% 46%;
+    --sidebar-border: 222 24% 18%;
+    --sidebar-accent: 222 26% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-primary: var(--primary);
+}
+
+/* Customizer drawer MUST always stay clean card background */
+aside.customizer-drawer {
+    background-color: hsl(var(--card)) !important;
+    background-image: none !important;
+    color: hsl(var(--card-foreground)) !important;
+}
+
+html[data-sidebar-color='dark'] aside.main-sidebar {
+    background-color: #0f172a !important;
+    background-image: none !important;
+    color: #e2e8f0 !important;
+    --sidebar-foreground: 215 20.2% 65.1%;
+    --sidebar-muted: 215 16.3% 46.9%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+}
+html[data-sidebar-color='light'] aside.main-sidebar {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #0f172a !important;
+    border-right: 1px solid #e2e8f0 !important;
+    --sidebar-foreground: 222.2 47.4% 11.2%;
+    --sidebar-muted: 215.4 16.3% 46.9%;
+    --sidebar-accent: 210 40% 96.1%;
+}
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='light'] aside.main-sidebar .nav-link {
+    color: #0f172a !important;
+}
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-search input {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+html[data-sidebar-color='primary'] aside.main-sidebar {
+    background-color: hsl(var(--primary)) !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='primary'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='primary'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='primary'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='gradient'] aside.main-sidebar,
+html[data-sidebar-color='gradient1'] aside.main-sidebar {
+    background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 80%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='gradient2'] aside.main-sidebar {
+    background: linear-gradient(180deg, #0d9488 0%, #064e3b 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='gradient2'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient2'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient2'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='gradient3'] aside.main-sidebar {
+    background: linear-gradient(180deg, #e11d48 0%, #4c0519 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='gradient3'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient3'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient3'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+/* Sidebar Custom Gradient Picker */
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar,
+aside.main-sidebar[data-sidebar-color='custom_gradient'] {
+    background: linear-gradient(180deg, var(--custom-sb-grad-from, #1e1b4b) 0%, var(--custom-sb-grad-to, #0f172a) 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+/* Sidebar divider & search border overrides */
+aside.main-sidebar .sidebar-search input {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+aside.main-sidebar div.border-t {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-sidebar-color='light'] aside.main-sidebar div.border-t {
+    border-color: #e2e8f0 !important;
+}
+
+html[data-sidebar-color='transparent'] aside.main-sidebar {
+    background-color: rgba(15, 23, 42, 0.55) !important;
+    background-image: none !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 75%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='transparent'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='transparent'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='transparent'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+/* Sidebar Image Presets */
+html[data-sidebar-color='image1'] aside.main-sidebar {
+    background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&auto=format&fit=crop&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 80%;
+    --sidebar-accent: 0 0% 100% / 0.2;
+}
+html[data-sidebar-color='image1'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image1'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image1'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='image2'] aside.main-sidebar {
+    background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&auto=format&fit=crop&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 80%;
+    --sidebar-accent: 0 0% 100% / 0.2;
+}
+html[data-sidebar-color='image2'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image2'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image2'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='image3'] aside.main-sidebar {
+    background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 80%;
+    --sidebar-accent: 0 0% 100% / 0.2;
+}
+html[data-sidebar-color='image3'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image3'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image3'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+/* ============================================================
+   HEADER / NAVBAR COLOR & BACKGROUND IMAGE OVERRIDES
+   ============================================================ */
+
+header {
+    transition-property: transform, opacity;
+}
+
+html[data-navbar-color='default'] header:not(.fixed),
+header[data-navbar-color='default']:not(.fixed) {
+    background-color: hsl(var(--background) / 0.85);
+}
+
+html[data-navbar-color='light'] header,
+header[data-navbar-color='light'] {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html[data-navbar-color='dark'] header,
+header[data-navbar-color='dark'] {
+    background-color: #0f172a !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-navbar-color='primary'] header,
+header[data-navbar-color='primary'] {
+    background-color: hsl(var(--primary)) !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid transparent !important;
+}
+
+html[data-navbar-color='transparent'] header,
+header[data-navbar-color='transparent'] {
+    background-color: transparent !important;
+    background-image: none !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid transparent !important;
+}
+
+html[data-navbar-color='image1'] header,
+header[data-navbar-color='image1'] {
+    background-image: linear-gradient(90deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&auto=format&fit=crop&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+}
+
+html[data-navbar-color='image2'] header,
+header[data-navbar-color='image2'] {
+    background-image: linear-gradient(90deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    color: #ffffff !important;
+}
+
+/* Header Gradients */
+html[data-navbar-color='gradient'] header,
+header[data-navbar-color='gradient'],
+html[data-navbar-color='gradient1'] header,
+header[data-navbar-color='gradient1'] {
+    background: linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-navbar-color='gradient2'] header,
+header[data-navbar-color='gradient2'] {
+    background: linear-gradient(90deg, #0d9488 0%, #064e3b 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-navbar-color='gradient3'] header,
+header[data-navbar-color='gradient3'] {
+    background: linear-gradient(90deg, #e11d48 0%, #4c0519 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Header Custom Gradient */
+html[data-navbar-color='custom_gradient'] header,
+header[data-navbar-color='custom_gradient'] {
+    background: linear-gradient(90deg, var(--custom-nb-grad-from, #1e1b4b) 0%, var(--custom-nb-grad-to, #0f172a) 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* High Contrast Text & Hover States for Colored/Dark/Gradient/Image Headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='custom_gradient'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='custom_gradient'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) {
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav a,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav svg,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav a,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav svg {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav span,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav span {
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button i,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button svg,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button span,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button i,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button svg,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button span {
+    color: #ffffff !important;
+}
+
+/* Translucent hover state for all buttons on colored headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button:hover,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Translucent search button on colored headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button.me-1,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button.me-1 {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header kbd,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) kbd {
+    background-color: rgba(255, 255, 255, 0.22) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+}
+
+@theme inline {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+    --color-destructive: hsl(var(--destructive));
+    --color-destructive-foreground: hsl(var(--destructive-foreground));
+    --color-success: hsl(var(--success));
+    --color-success-foreground: hsl(var(--success-foreground));
+    --color-warning: hsl(var(--warning));
+    --color-warning-foreground: hsl(var(--warning-foreground));
+    --color-info: hsl(var(--info));
+    --color-info-foreground: hsl(var(--info-foreground));
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+
+    --color-chart-1: hsl(var(--chart-1));
+    --color-chart-2: hsl(var(--chart-2));
+    --color-chart-3: hsl(var(--chart-3));
+    --color-chart-4: hsl(var(--chart-4));
+    --color-chart-5: hsl(var(--chart-5));
+
+    --color-sidebar: hsl(var(--sidebar));
+    --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+    --color-sidebar-muted: hsl(var(--sidebar-muted));
+    --color-sidebar-border: hsl(var(--sidebar-border));
+    --color-sidebar-accent: hsl(var(--sidebar-accent));
+    --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+    --color-sidebar-primary: hsl(var(--sidebar-primary));
+
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+    * {
+        border-color: hsl(var(--border));
+    }
+    html {
+        -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
+    }
+    body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-feature-settings: 'cv11', 'ss01';
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+    /* Directional icons flip in RTL */
+    [dir='rtl'] .rtl-flip {
+        transform: scaleX(-1);
+    }
+    /* Interactive elements get a pointer cursor (Tailwind v4 defaults buttons to
+       the arrow cursor). Excludes disabled controls. */
+    button:not(:disabled),
+    [role='button']:not(:disabled),
+    [role='tab']:not(:disabled),
+    summary,
+    label[for] {
+        cursor: pointer;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--muted-foreground) / 0.25);
+        border-radius: 9999px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: hsl(var(--muted-foreground) / 0.45);
+    }
+    .scrollbar-sidebar::-webkit-scrollbar-thumb {
+        background-color: hsl(0 0% 100% / 0.12);
+    }
+    /* Hide scrollbar entirely (used by the horizontal menu track) */
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Skeleton shimmer (used by the Placeholders demos) */
+    .skeleton {
+        position: relative;
+        overflow: hidden;
+        background-color: hsl(var(--muted));
+        border-radius: 0.375rem;
+    }
+    .skeleton::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.07), transparent);
+        animation: ak-shimmer 1.5s infinite;
+    }
+    @keyframes ak-shimmer {
+        100% { transform: translateX(100%); }
+    }
+    /* Carousel autoplay progress bar */
+    @keyframes ak-cbar {
+        from { width: 0%; }
+        to { width: 100%; }
+    }
+    /* Focus ring */
+    :focus-visible {
+        outline: 2px solid hsl(var(--ring));
+        outline-offset: 2px;
+    }
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* Lucide icons render as <svg>; keep them crisp & sized by context */
+    [data-lucide],
+    .lucide {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2;
+        flex: none;
+    }
+
+    /* Reusable surface + interaction primitives */
+    .ak-ring {
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    }
+    .ak-card {
+        @apply rounded-xl border border-border bg-card text-card-foreground shadow-sm;
+    }
+
+    /* Sidebar nav link */
+    .nav-link {
+        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-normal text-sidebar-foreground;
+        transition: none;
+    }
+
+
+    .nav-link:hover {
+        @apply bg-sidebar-accent/70 text-sidebar-accent-foreground;
+    }
+    .nav-link.is-open {
+        @apply text-sidebar-foreground font-medium;
+    }
+    /* Top-level active item OR parent group with an active child (e.g. Dashboards) */
+    .nav-link.active:not(.nav-sub),
+    .nav-link.parent-active {
+        background: hsl(var(--primary) / 0.15) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 500;
+        box-shadow: none;
+    }
+
+    .nav-link.active:not(.nav-sub) .nav-icon,
+    .nav-link.parent-active .nav-icon {
+        color: hsl(var(--primary)) !important;
+    }
+    .nav-link.active:not(.nav-sub)::before,
+    .nav-link.parent-active:not(.nav-sub)::before {
+        content: '';
+        position: absolute;
+        inset-y: 0.375rem;
+        start: 0;
+        width: 0.25rem;
+        border-radius: 9999px;
+        background: hsl(var(--primary)) !important;
+    }
+
+    /* Colored sidebars */
+    html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='primary'] .nav-link.parent-active,
+    html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active,
+    html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color^='image'] .nav-link.parent-active,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        box-shadow: none;
+    }
+    html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='primary'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color^='image'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active .nav-icon {
+        color: #ffffff !important;
+    }
+    html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='primary'] .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color^='image'] .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active:not(.nav-sub)::before {
+        background: #ffffff !important;
+    }
+
+    /* Light sidebar */
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='light'] .nav-link.parent-active {
+        background: hsl(var(--primary)) !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='light'] .nav-link.parent-active .nav-icon {
+        color: #ffffff !important;
+    }
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='light'] .nav-link.parent-active:not(.nav-sub)::before {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    .nav-group-label {
+        @apply px-3 pb-1.5 pt-4 text-[0.68rem] font-semibold uppercase tracking-wider;
+        color: rgba(255, 255, 255, 0.65) !important;
+        letter-spacing: 0.08em;
+    }
+    html[data-sidebar-color='light'] .nav-group-label {
+        color: hsl(215.4 16.3% 46.9%) !important;
+    }
+    html[data-sidebar-color='dark'] .nav-group-label {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    /* ── Tree submenu ────────────────────────────────── */
+    /* Each nested list indents, so the menu branches out like roots/a file tree. */
+    .nav-sublist {
+        @apply relative ms-[1.1rem] mt-1 space-y-0.5 ps-[1.4rem];
+    }
+    /* the base vertical branch rail (spine) for this level */
+    .nav-sublist::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 0.55rem;
+        inset-block-start: 0.1rem;
+        inset-block-end: 0.85rem;
+        width: 2px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+    html[data-sidebar-color='light'] .nav-sublist::before {
+        background: hsl(var(--sidebar-foreground) / 0.18);
+    }
+    html[data-accent='midnight'] .nav-sublist::before,
+    html[data-accent='black'] .nav-sublist::before {
+        background: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .nav-sub {
+        position: relative;
+        gap: 0.55rem;
+        display: flex;
+        align-items: center;
+    }
+    /* Sub-items that are collapsible (have a chevron inside) — keep chevron small but visible */
+    .nav-sub .nav-chevron {
+        width: 0.75rem;
+        height: 0.75rem;
+        flex-shrink: 0;
+        opacity: 0.7;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    html[data-sidebar-color='light'] .nav-sub .nav-chevron {
+        color: hsl(var(--sidebar-muted)) !important;
+        opacity: 1;
+    }
+    /* horizontal branch reaching out from the rail to each node (the ├ / └) */
+    .nav-sub::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        inset-inline-start: -0.87rem;
+        width: 1.17rem;
+        height: 2px;
+        transform: translateY(-50%);
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.25);
+        transition: none;
+    }
+    html[data-sidebar-color='light'] .nav-sub::after {
+        background: hsl(var(--sidebar-foreground) / 0.18);
+    }
+    .nav-node {
+        position: relative;
+        z-index: 1;
+        width: 0.35rem;
+        height: 0.35rem;
+        flex: none;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.5);
+        transition: none;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+    }
+
+    html[data-sidebar-color='light'] .nav-node {
+        background: hsl(var(--sidebar-muted));
+    }
+    .nav-sub:hover .nav-node { background: rgba(255, 255, 255, 0.9); }
+    html[data-sidebar-color='light'] .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
+    .nav-sub:hover::after { background: rgba(255, 255, 255, 0.6); }
+    html[data-sidebar-color='light'] .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
+    
+    /* Active sub-item styling */
+    .nav-sub.active {
+        background: hsl(var(--sidebar-primary) / 0.18) !important;
+        color: hsl(var(--primary)) !important;
+    }
+    .nav-sub.active .nav-node,
+    .nav-sub.parent-active .nav-node {
+        width: 0.38rem;
+        height: 0.38rem;
+        background: hsl(var(--sidebar-primary)) !important;
+        box-shadow: 0 0 0 2px hsl(var(--sidebar-primary) / 0.35), 0 0 6px hsl(var(--sidebar-primary) / 0.6) !important;
+        transform: scale(1.15);
+    }
+
+    .nav-sub.active::after,
+    .nav-sub.parent-active::after { 
+        background: hsl(var(--sidebar-primary)) !important; 
+    }
+
+    /* Active Trail Vertical Connector Line: from top of tree down to the active item's horizontal branch */
+    .nav-sub::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: -0.87rem;
+        inset-block-start: -0.5rem;
+        inset-block-end: -0.5rem;
+        width: 2px;
+        border-radius: 9999px;
+        background: transparent;
+        transition: none;
+    }
+
+    .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    /* Lower top start of the active trail for the first item in the list so it doesn't overlap the parent button above */
+    .nav-sublist > li:first-child:has(~ li .nav-sub.active) > .nav-sub::before,
+    .nav-sublist > li:first-child:has(~ li .nav-sub.parent-active) > .nav-sub::before,
+    .nav-sublist > li:first-child > .nav-sub.active::before,
+    .nav-sublist > li:first-child > .nav-sub.parent-active::before {
+        inset-block-start: 0.15rem !important;
+    }
+
+    .nav-sub.active::before,
+    .nav-sub.parent-active::before {
+        background: hsl(var(--sidebar-primary)) !important;
+        inset-block-start: -0.5rem;
+        inset-block-end: calc(50% - 1px);
+    }
+
+    /* Nested parent item (e.g. Ecommerce inside Pages) when a sub-child is active */
+    .nav-sub.parent-active {
+        background: hsl(var(--sidebar-primary) / 0.12) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 500;
+    }
+
+    /* Colored sidebars (bg = primary color / gradient / image / custom_gradient): use white text & white accents for contrast */
+    html[data-sidebar-color='primary'] .nav-sub.active,
+    html[data-sidebar-color='primary'] .nav-sub.parent-active,
+    html[data-sidebar-color^='gradient'] .nav-sub.active,
+    html[data-sidebar-color^='gradient'] .nav-sub.parent-active,
+    html[data-sidebar-color^='image'] .nav-sub.active,
+    html[data-sidebar-color^='image'] .nav-sub.parent-active,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.active,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.parent-active {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+    }
+    html[data-sidebar-color='primary'] .nav-sub.active .nav-node,
+    html[data-sidebar-color='primary'] .nav-sub.parent-active .nav-node,
+    html[data-sidebar-color^='gradient'] .nav-sub.active .nav-node,
+    html[data-sidebar-color^='gradient'] .nav-sub.parent-active .nav-node,
+    html[data-sidebar-color^='image'] .nav-sub.active .nav-node,
+    html[data-sidebar-color^='image'] .nav-sub.parent-active .nav-node,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.active .nav-node,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.parent-active .nav-node {
+        background: #ffffff !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35), 0 0 8px rgba(255, 255, 255, 0.6) !important;
+    }
+    html[data-sidebar-color='primary'] .nav-sub.active::after,
+    html[data-sidebar-color='primary'] .nav-sub.parent-active::after,
+    html[data-sidebar-color^='gradient'] .nav-sub.active::after,
+    html[data-sidebar-color^='gradient'] .nav-sub.parent-active::after,
+    html[data-sidebar-color^='image'] .nav-sub.active::after,
+    html[data-sidebar-color^='image'] .nav-sub.parent-active::after,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.active::after,
+    html[data-sidebar-color='custom_gradient'] .nav-sub.parent-active::after {
+        background: #ffffff !important;
+    }
+
+    /* Light sidebar: primary accent color */
+    html[data-sidebar-color='light'] .nav-sub.active {
+        background: hsl(var(--sidebar-primary) / 0.12) !important;
+        color: hsl(var(--sidebar-primary)) !important;
+    }
+    html[data-sidebar-color='light'] .nav-sub.active .nav-node {
+        background: hsl(var(--sidebar-primary)) !important;
+        box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.1), 0 0 10px hsl(var(--sidebar-primary) / 0.5) !important;
+    }
+    html[data-sidebar-color='light'] .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
+
+    /* ── Submenu Modes (Tree Line vs Clean Dot vs Pill Highlight) ── */
+
+    /* Non-tree modes (dots / pill): Shift list left so text has breathing room and doesn't squish right */
+    html[data-sidebar-style='dots'] .nav-sublist,
+    html[data-sidebar-style='pill'] .nav-sublist {
+        margin-inline-start: 0.2rem !important;
+        padding-inline-start: 0.75rem !important;
+    }
+
+    /* 1) Clean Dot Mode: Hide tree line rails & horizontal branch connectors */
+    html[data-sidebar-style='dots'] .nav-sublist::before,
+    html[data-sidebar-style='dots'] .nav-sub::after,
+    html[data-sidebar-style='dots'] .nav-sub::before {
+        display: none !important;
+    }
+
+    /* 2) Pill Mode: Hide tree lines & style active sub-item as a solid pill */
+    html[data-sidebar-style='pill'] .nav-sublist::before,
+    html[data-sidebar-style='pill'] .nav-sub::after,
+    html[data-sidebar-style='pill'] .nav-sub::before {
+        display: none !important;
+    }
+    html[data-sidebar-style='pill'] .nav-sub.active {
+        background: hsl(var(--sidebar-primary)) !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+    }
+    html[data-sidebar-style='pill'] .nav-sub.active .nav-node {
+        background: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+    /* ── Midnight / Black Accent Mode: High-contrast text & crisp white active lines in sidebar ── */
+    html.dark[data-accent='midnight'] .text-primary,
+    html.dark[data-accent='black'] .text-primary {
+        color: #f8fafc !important;
+    }
+    html.dark[data-accent='midnight'] .border-primary,
+    html.dark[data-accent='black'] .border-primary {
+        border-color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* ALL sidebar active lines, indicators, tree lines, branch lines & nodes MUST be PURE SOLID WHITE */
+    html[data-accent='midnight'] aside .nav-link.active:not(.nav-sub)::before,
+    html[data-accent='midnight'] aside .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-accent='midnight'] aside .nav-sub.active::after,
+    html[data-accent='midnight'] aside .nav-sub.parent-active::after,
+    html[data-accent='midnight'] aside .nav-sub.active::before,
+    html[data-accent='midnight'] aside .nav-sub.parent-active::before,
+    html[data-accent='midnight'] aside .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-accent='midnight'] aside .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub)::before,
+    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-accent='black'] aside .nav-sub.active::after,
+    html[data-accent='black'] aside .nav-sub.parent-active::after,
+    html[data-accent='black'] aside .nav-sub.active::before,
+    html[data-accent='black'] aside .nav-sub.parent-active::before,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
+        background: #ffffff !important;
+        opacity: 1 !important;
+    }
+
+    html[data-accent='midnight'] aside .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-accent='midnight'] aside .nav-link.parent-active .nav-icon,
+    html[data-accent='midnight'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='midnight'] aside .nav-link.parent-active,
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-accent='black'] aside .nav-link.parent-active .nav-icon,
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active {
+        color: #ffffff !important;
+    }
+
+    html[data-accent='midnight'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='midnight'] aside .nav-link.parent-active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub) {
+        background: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    html[data-accent='midnight'] aside .nav-sub.active,
+    html[data-accent='black'] aside .nav-sub.active {
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+    }
+
+    html[data-accent='midnight'] aside .nav-sub.active .nav-node,
+    html[data-accent='midnight'] aside .nav-sub.parent-active .nav-node,
+    html[data-accent='black'] aside .nav-sub.active .nav-node,
+    html[data-accent='black'] aside .nav-sub.parent-active .nav-node {
+        background: #ffffff !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 8px rgba(255, 255, 255, 0.8) !important;
+    }
+
+
+
+
+    /* Page-enter animation: fade + zoom "pop" from center (no directional slide) */
+    .animate-in-up {
+        animation: ak-page-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+        transform-origin: center center;
+        will-change: transform, opacity;
+    }
+}
+
+/* Content offset for the fixed sidebar — driven by <html> attrs (set pre-paint),
+   so the page never slides in from the side on load. Transition only fires on toggle. */
+@media (min-width: 1024px) {
+    html[data-layout='vertical'] .app-shift {
+        padding-inline-start: 16rem; /* matches sidebar w-64 */
+    }
+    html[data-layout='vertical'].sidebar-collapsed .app-shift {
+        padding-inline-start: 76px; /* matches collapsed rail */
+    }
+    /* Horizontal layout: bars stay full width, but header + body content share the
+       same 2rem side inset so the logo, menu and body line up with a bit of breathing room */
+    html[data-layout='horizontal'] .app-shift > header,
+    html[data-layout='horizontal'] .app-shift > main {
+        padding-inline: 2rem;
+    }
+}
+
+/* Collapsed "icon rail" sidebar (desktop only) */
+@media (min-width: 1024px) {
+    aside.is-rail .nav-label,
+    aside.is-rail .nav-badge,
+    aside.is-rail .nav-chevron,
+    aside.is-rail .nav-sublist,
+    aside.is-rail .sidebar-brand-text,
+    aside.is-rail .sidebar-search,
+    aside.is-rail .sidebar-usercard-text {
+        display: none;
+    }
+    aside.is-rail .nav-link {
+        justify-content: center;
+        padding-inline: 0.5rem;
+    }
+    aside.is-rail .nav-group-label {
+        position: relative;
+        overflow: hidden;
+        height: 0px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: transparent;
+        font-size: 0;
+    }
+    aside.is-rail .nav-group-label::after {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 60%;
+        margin: 0 auto;
+        background-color: currentColor;
+        opacity: 0.2;
+    }
+    aside.is-rail .sidebar-brand {
+        justify-content: center;
+    }
+    aside.is-rail .sidebar-usercard {
+        justify-content: center;
+    }
+}
+
+/* Force submenus open while filtering the sidebar search */
+nav.is-searching .nav-sublist {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+/* ---------------------------------------------------------------
+ * Day / Night View Transition
+ * ------------------------------------------------------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+    transform-origin: center center;
+}
+::view-transition-old(root) {
+    z-index: 1;
+}
+::view-transition-new(root) {
+    z-index: 9999;
+}
+
+/* Desktop circle ripple — shrink direction (dark→light) */
+.theme-shrink::view-transition-old(root) {
+    z-index: 9999;
+}
+.theme-shrink::view-transition-new(root) {
+    z-index: 1;
+}
+
+
+/* Fallback smooth theme transition class for older browsers */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+}
+
+
+@keyframes ak-page-in {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Card Animation Keyframes */
+@keyframes ak-card-fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ak-card-fade-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ak-card-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes ak-card-zoom-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Card Animation Selectors */
+html[data-card-animation="fade-up"] .ak-card,
+html[data-card-animation="fade-down"] .ak-card,
+html[data-card-animation="fade-in"] .ak-card,
+html[data-card-animation="zoom-in"] .ak-card {
+    opacity: 0;
+}
+
+html[data-card-animation="fade-up"] .animate-cards .ak-card {
+    animation: ak-card-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="fade-down"] .animate-cards .ak-card {
+    animation: ak-card-fade-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="fade-in"] .animate-cards .ak-card {
+    animation: ak-card-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="zoom-in"] .animate-cards .ak-card {
+    animation: ak-card-zoom-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Auto Component Skeleton Loading styles */
+.livewire-loading .ak-card {
+    position: relative;
+    pointer-events: none;
+    overflow: hidden;
+}
+.livewire-loading .ak-card > * {
+    opacity: 0.45;
+    filter: blur(1px);
+    transition: opacity 0.2s, filter 0.2s;
+}
+.livewire-loading .ak-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: ak-skeleton-shimmer 1.5s infinite linear;
+}
+
+html:not(.dark) .livewire-loading .ak-card::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes ak-skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Dynamic Auto-Detect Page Skeleton CSS Converter */
+.ak-skeleton-active {
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+.ak-skeleton-active h1,
+.ak-skeleton-active h2,
+.ak-skeleton-active h3,
+.ak-skeleton-active h4,
+.ak-skeleton-active h5,
+.ak-skeleton-active h6,
+.ak-skeleton-active p,
+.ak-skeleton-active small,
+.ak-skeleton-active strong,
+.ak-skeleton-active em,
+.ak-skeleton-active label,
+.ak-skeleton-active th,
+.ak-skeleton-active td,
+.ak-skeleton-active a:not(:has(*)),
+.ak-skeleton-active span:not(:has(*)),
+.ak-skeleton-active svg,
+.ak-skeleton-active .lucide,
+.ak-skeleton-active button {
+    position: relative !important;
+    overflow: hidden !important;
+    color: transparent !important;
+    background-color: hsl(var(--muted)) !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    border-radius: 0.25rem !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    display: inline-block !important; /* Vital to support dimensions and overflow clipping on inline text nodes */
+}
+
+/* Rounded circular badges for icons */
+.ak-skeleton-active svg,
+.ak-skeleton-active .lucide {
+    border-radius: 50% !important;
+}
+.ak-skeleton-active svg *,
+.ak-skeleton-active .lucide * {
+    opacity: 0 !important;
+}
+
+/* Void elements (no pseudo-elements support) */
+.ak-skeleton-active img {
+    background-color: hsl(var(--muted)) !important;
+    opacity: 0.25 !important;
+    filter: blur(4px) !important;
+    pointer-events: none !important;
+}
+
+.ak-skeleton-active input,
+.ak-skeleton-active select,
+.ak-skeleton-active textarea {
+    background-color: hsl(var(--muted)) !important;
+    border-color: transparent !important;
+    color: transparent !important;
+    pointer-events: none !important;
+    display: inline-block !important;
+}
+
+.ak-skeleton-active canvas {
+    opacity: 0.1 !important;
+    filter: blur(3px) !important;
+    pointer-events: none !important;
+}
+
+/* Shimmer Sweep Animation on all non-void elements */
+.ak-skeleton-active h1::after,
+.ak-skeleton-active h2::after,
+.ak-skeleton-active h3::after,
+.ak-skeleton-active h4::after,
+.ak-skeleton-active h5::after,
+.ak-skeleton-active h6::after,
+.ak-skeleton-active p::after,
+.ak-skeleton-active small::after,
+.ak-skeleton-active strong::after,
+.ak-skeleton-active em::after,
+.ak-skeleton-active label::after,
+.ak-skeleton-active th::after,
+.ak-skeleton-active td::after,
+.ak-skeleton-active a:not(:has(*))::after,
+.ak-skeleton-active span:not(:has(*))::after,
+.ak-skeleton-active svg::after,
+.ak-skeleton-active .lucide::after,
+.ak-skeleton-active button::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    transform: translateX(-100%) !important;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        hsl(var(--foreground) / 0.08), 
+        transparent
+    ) !important;
+    animation: ak-shimmer 1.5s infinite !important;
+}
+
+/* Fullscreen Page Loader Styling */
+#global-page-loader {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.dark #global-page-loader {
+    background-color: rgba(9, 15, 29, 0.85) !important;
+}
+
+#global-page-loader .loader-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Layout width options */
+.main-content-container {
+    max-width: 1600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html[data-layout-fluid="true"] .main-content-container {
+    max-width: 100% !important;
+}
+
+.layout-width-transitioning .main-content-container {
+    transition: max-width 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* ============================================================
+   Smart Mosque Platform — Premium Mosque Design System
+   Warna dasar: Coklat hangat (Sandstone/Walnut) + Aksen Emas
+   ============================================================ */
+
+.font-amiri { font-family: 'Amiri', serif; }
+.font-outfit { font-family: 'Outfit', sans-serif; }
+.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+:root {
+    /* Coklat hangat Islami sebagai warna utama */
+    --primary: 26 55% 32%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 26 55% 32%;
+    --sidebar-primary: 26 55% 34%;
+    --gold: 38 92% 50%;
+    --gold-foreground: 26 40% 12%;
+    --mosque-brown: 26 55% 32%;
+    --mosque-brown-light: 28 50% 48%;
+    --mosque-gold: 38 92% 50%;
+}
+
+.dark {
+    --primary: 28 55% 45%;
+    --primary-foreground: 26 40% 8%;
+    --ring: 28 55% 45%;
+    --sidebar-primary: 28 55% 48%;
+    --gold: 43 96% 56%;
+}
+
+/* Islamic Geometric Arabesque — warna coklat & emas */
+.bg-islamic-pattern {
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(139, 90, 43, 0.07) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23a0622a' stroke-width='0.75' stroke-opacity='0.14'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3Cpath d='M40 10L70 40L40 70L10 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Cpath d='M0 0l80 80M80 0L0 80'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.dark .bg-islamic-pattern {
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(180, 120, 60, 0.10) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23c8844e' stroke-width='0.75' stroke-opacity='0.15'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3Cpath d='M40 10L70 40L40 70L10 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Cpath d='M0 0l80 80M80 0L0 80'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg-islamic-stars {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l7 23 23 7-23 7-7 23-7-23-23-7 23-7z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* Islamic Arch (Mihrab) Shape Cards */
+.mihrab-card {
+    border-radius: 2.5rem 2.5rem 1.25rem 1.25rem;
+    position: relative;
+}
+
+/* Text Gradients — Emas Islami */
+.text-gold-gradient {
+    background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-brown-gradient {
+    background: linear-gradient(135deg, #d4a76a 0%, #a0622a 50%, #6b3a18 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero beranda — foto masjid fullscreen, vignette coklat gelap + cahaya emas. */
+.hero-shell {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    color: #fff;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    animation: hero-drift 30s ease-in-out infinite alternate;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(25,10,5,.70) 0%, rgba(30,12,5,.40) 35%, rgba(15,6,2,.95) 100%),
+        radial-gradient(60rem 45rem at 25% 20%, rgba(139,80,30,.40), transparent 70%),
+        radial-gradient(40rem 30rem at 80% 15%, rgba(245,158,11,.22), transparent 55%);
+}
+
+@keyframes hero-drift {
+    from { transform: scale(1.05) translate3d(0, 0, 0); }
+    to   { transform: scale(1.12) translate3d(-1.5%, -1.5%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg { animation: none; }
+}
+
+/* Kartu kaca —  nada coklat amber gelap */
+.glass {
+    background: rgba(255, 245, 235, 0.10);
+    border: 1px solid rgba(245, 200, 140, 0.18);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px 0 rgba(20, 8, 2, 0.30);
+}
+
+.glass-strong {
+    background: linear-gradient(145deg, rgba(255, 245, 230, 0.16) 0%, rgba(220, 170, 100, 0.08) 100%);
+    border: 1px solid rgba(245, 190, 100, 0.25);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 20px 40px rgba(15, 6, 2, 0.40), inset 0 1px 0 rgba(255, 235, 180, 0.25);
+}
+
+.glass-mosque-gold {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.22) 0%, rgba(120, 60, 15, 0.30) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.40);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Running text (marquee) — jeda saat disentuh/hover. */
+.marquee {
+    display: flex;
+    overflow: hidden;
+    gap: 3rem;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.marquee > * {
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    gap: 3rem;
+    animation: marquee 65s linear infinite;
+}
+
+.marquee:hover > * { animation-play-state: paused; }
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+}
+
+/* Progress bar donasi — coklat ke emas. */
+.fund-bar {
+    height: .65rem;
+    border-radius: 999px;
+    background: hsl(var(--muted));
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.12);
+}
+
+.fund-bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #92400e 0%, #b45309 40%, #f59e0b 100%);
+    transition: width .6s cubic-bezier(.25, 1, .5, 1);
+}
+
+/* Kolom waktu sholat */
+.prayer-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    border-radius: 1.1rem;
+    padding: .85rem .5rem;
+    border: 1px solid rgba(245, 200, 140, 0.12);
+    background: rgba(20, 8, 3, 0.20);
+    transition: all .25s ease;
+}
+
+.prayer-pill[data-state="active"] {
+    background: linear-gradient(180deg, rgba(180, 100, 30, 0.35) 0%, rgba(120, 60, 10, 0.20) 100%);
+    border-color: rgba(245, 158, 11, 0.55);
+    box-shadow: 0 4px 18px rgba(180, 100, 30, 0.30);
+    transform: translateY(-3px);
+}
+
+/* Teks Arab Al-Quran & Bismillah. */
+.quran-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-size: 2rem;
+    line-height: 2.4;
+    direction: rtl;
+    text-align: right;
+}
+
+.bismillah-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    direction: rtl;
+    color: #f59e0b;
+}
+
+/* Kompas kiblat. */
+.qibla-dial {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid hsl(var(--border));
+    background:
+        conic-gradient(from 0deg, hsl(var(--muted)) 0 25%, transparent 0 100%) content-box,
+        radial-gradient(circle, hsl(var(--card)) 62%, hsl(var(--muted)) 63%);
+}
+
+/* Skeleton sederhana untuk pemuatan Livewire. */
+.shimmer {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / .5) 37%, hsl(var(--muted)) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+    from { background-position: 100% 50%; }
+    to   { background-position: 0 50%; }
+}
+
+/* ============================================================
+   Lenis Smooth Scroll Styling
+   ============================================================ */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}
+
+/* ============================================================
+   Card Transitions & Micro-Interactions
+   ============================================================ */
+.card-transition {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease;
+    will-change: transform, box-shadow, border-color;
+}
+
+.card-transition:hover {
+    transform: translateY(-6px) scale(1.008);
+    box-shadow: 0 20px 40px -12px rgba(139, 90, 43, 0.25), 0 0 25px 2px rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+.dark .card-transition:hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 30px 4px rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.6) !important;
+}
+
+.card-lift-sm {
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.card-lift-sm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12);
+}
+
+@media print {
+    header, footer, nav, .no-print { display: none !important; }
+    .ak-card { break-inside: avoid; box-shadow: none !important; }
+}
+
+/* ============================================================
+   Lenis Double Scroll & Nested Container Support
+   ============================================================ */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent],
+.lenis.lenis-smooth .overflow-y-auto,
+.lenis.lenis-smooth .overflow-auto {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
