@@ -4,17 +4,14 @@
 
 <div class="font-jakarta bg-background text-foreground antialiased selection:bg-amber-500 selection:text-stone-950">
     {{-- ══════════════ HERO SECTION — EXACT MATCH DESIGN ══════════════ --}}
-    <section class="hero-shell relative min-h-[92vh] sm:min-h-screen overflow-hidden flex flex-col justify-between">
-        {{-- Full bleed background photo --}}
-        <div class="hero-bg absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
-             style="background-image: url('{{ $heroImage }}')"></div>
-
-        {{-- Gradient Overlays: Dark gradient on left to make text pop, subtle glow on architecture --}}
+    <section class="hero-shell relative min-h-[92vh] sm:min-h-screen overflow-hidden flex flex-col justify-between bg-stone-950">
+        {{-- Subtle Islamic geometric pattern & warm radial gradients background --}}
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-20 bg-islamic-stars"></div>
         <div class="absolute inset-0 z-1 pointer-events-none"
              style="background:
-                linear-gradient(90deg, rgba(12,8,4,0.92) 0%, rgba(16,10,5,0.78) 45%, rgba(18,12,6,0.30) 75%, rgba(10,6,2,0.65) 100%),
-                linear-gradient(180deg, rgba(10,6,2,0.70) 0%, transparent 35%, rgba(12,8,4,0.95) 100%),
-                radial-gradient(ellipse 50% 50% at 20% 40%, rgba(217,119,6,0.18) 0%, transparent 70%);"></div>
+                radial-gradient(ellipse 60% 60% at 75% 30%, rgba(217,119,6,0.16) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 50%, rgba(180,83,9,0.14) 0%, transparent 65%),
+                linear-gradient(180deg, rgba(12,8,4,0.95) 0%, rgba(18,10,4,0.98) 100%);"></div>
 
         {{-- MAIN CONTENT CONTAINER: 2-Column layout matching reference screenshot --}}
         <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-36">
