@@ -463,8 +463,10 @@
                             </p>
                         </div>
                         <div class="mt-8">
-                            <a href="{{ route('transparansi') }}" wire:navigate>
-                                <x-ui.button icon="chart-pie" class="bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition-all">Lihat Laporan Transparan</x-ui.button>
+                            <a href="{{ route('transparansi') }}" wire:navigate
+                               class="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 px-6 py-3 text-sm font-bold text-stone-950 shadow-lg hover:scale-105 active:scale-[.98] transition-all">
+                                <i data-lucide="chart-pie" class="size-4 shrink-0"></i>
+                                Lihat Laporan Transparan
                             </a>
                         </div>
                     </div>
@@ -559,11 +561,15 @@
 
                 <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
                     <a href="{{ config('masjid.maps_url') }}" target="_blank"
-                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-[.98] px-4 h-10 text-xs sm:text-sm font-bold text-stone-950 shadow-sm transition-all">
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 active:scale-[.98] px-4 h-10 text-xs sm:text-sm font-bold text-stone-950 shadow-sm transition-all">
                         <i data-lucide="map-pin" class="size-4 shrink-0"></i>
                         Buka Google Maps
                     </a>
-                    <x-ui.button variant="outline" :href="route('kontak')" icon="mail" class="w-full justify-center rounded-xl text-xs sm:text-sm px-2 sm:px-4">Hubungi Pengurus</x-ui.button>
+                    <a href="{{ route('kontak') }}" wire:navigate
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-stone-200 dark:border-amber-800/50 bg-transparent hover:bg-stone-100 dark:hover:bg-amber-800/20 active:scale-[.98] px-4 h-10 text-xs sm:text-sm font-bold text-foreground transition-all">
+                        <i data-lucide="mail" class="size-4 shrink-0"></i>
+                        Hubungi Pengurus
+                    </a>
                 </div>
             </div>
 
