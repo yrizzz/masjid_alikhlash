@@ -1,206 +1,189 @@
 @php
-    $heroImage = $banner?->image ? img_url($banner->image) : route('placeholder', ['seed' => 'masjid-alikhlash']);
+    $heroImage = asset('images/hero-bg.png');
 @endphp
 
-<div class="font-jakarta bg-background text-foreground antialiased selection:bg-emerald-500 selection:text-white">
-    {{-- ══════════════ HERO SECTION — REDESIGN ══════════════ --}}
-    <section class="hero-shell relative overflow-hidden">
+<div class="font-jakarta bg-background text-foreground antialiased selection:bg-amber-500 selection:text-stone-950">
+    {{-- ══════════════ HERO SECTION — EXACT MATCH DESIGN ══════════════ --}}
+    <section class="hero-shell relative min-h-[92vh] sm:min-h-screen overflow-hidden flex flex-col justify-between">
         {{-- Full bleed background photo --}}
-        <div class="hero-bg" style="background-image: url('{{ $heroImage }}')"></div>
+        <div class="hero-bg absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
+             style="background-image: url('{{ $heroImage }}')"></div>
 
-        {{-- Multi-layer overlay: coklat tua gelap + sorot emas hangat --}}
-        <div class="absolute inset-0 z-[-1]"
+        {{-- Gradient Overlays: Dark gradient on left to make text pop, subtle glow on architecture --}}
+        <div class="absolute inset-0 z-1 pointer-events-none"
              style="background:
-                linear-gradient(180deg, rgba(22,8,2,.75) 0%, rgba(28,10,3,.42) 30%, rgba(12,4,1,.97) 100%),
-                radial-gradient(ellipse 80% 55% at 50% 0%, rgba(140,75,25,.38) 0%, transparent 65%),
-                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(245,158,11,.25) 0%, transparent 55%);"></div>
+                linear-gradient(90deg, rgba(12,8,4,0.92) 0%, rgba(16,10,5,0.78) 45%, rgba(18,12,6,0.30) 75%, rgba(10,6,2,0.65) 100%),
+                linear-gradient(180deg, rgba(10,6,2,0.70) 0%, transparent 35%, rgba(12,8,4,0.95) 100%),
+                radial-gradient(ellipse 50% 50% at 20% 40%, rgba(217,119,6,0.18) 0%, transparent 70%);"></div>
 
-        {{-- SVG Islamic arch/dome silhouette at bottom for depth — coklat walnut --}}
-        <div class="absolute bottom-0 inset-x-0 pointer-events-none z-0 overflow-hidden">
-            <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" class="w-full" preserveAspectRatio="none">
-                <path d="M0,200 L0,160 Q180,60 360,120 Q480,160 560,100 Q640,40 720,80 Q800,120 880,80 Q960,40 1040,100 Q1120,160 1200,120 Q1320,60 1440,160 L1440,200 Z"
-                      fill="rgba(15,6,2,0.95)"/>
-                <!-- Dome silhouette center -->
-                <ellipse cx="720" cy="85" rx="80" ry="55" fill="rgba(20,8,2,0.80)"/>
-                <rect x="700" y="20" width="40" height="70" rx="20" fill="rgba(25,10,3,0.75)"/>
-                <circle cx="720" cy="18" r="8" fill="rgba(245,158,11,0.55)"/>
-                <!-- Side minarets -->
-                <rect x="200" y="100" width="18" height="65" rx="9" fill="rgba(20,8,2,0.65)"/>
-                <circle cx="209" cy="98" r="5" fill="rgba(245,158,11,0.45)"/>
-                <rect x="1222" y="100" width="18" height="65" rx="9" fill="rgba(20,8,2,0.65)"/>
-                <circle cx="1231" cy="98" r="5" fill="rgba(245,158,11,0.45)"/>
-            </svg>
-        </div>
+        {{-- MAIN CONTENT CONTAINER: Left aligned layout matching reference screenshot --}}
+        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-40">
+            <div class="max-w-2xl space-y-6">
 
-        {{-- Floating star particles (CSS only) --}}
-        <div class="absolute inset-0 z-0 pointer-events-none bg-islamic-stars opacity-25"></div>
+                {{-- Arabic Verse Ornament --}}
+                <div class="space-y-1">
+                    <div class="flex items-center gap-3">
+                        <span class="h-px w-8 bg-amber-400/40"></span>
+                        <p class="font-amiri text-2xl sm:text-3xl text-amber-200/90 tracking-wide drop-shadow-md">
+                            إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
+                        </p>
+                        <span class="h-px w-8 bg-amber-400/40"></span>
+                    </div>
+                    <p class="text-[0.7rem] font-extrabold uppercase tracking-[0.25em] text-amber-400/80">
+                        QS. AT-TAUBAH : 18
+                    </p>
+                </div>
 
-        {{-- MAIN CONTENT: Centered layout --}}
-        <div class="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center min-h-screen px-4 pb-36 pt-28 text-center sm:px-6 lg:px-8">
+                {{-- Hero Mosque Title & Subtitle --}}
+                <div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight font-jakarta drop-shadow-lg">
+                        Masjid Jami’<br />
+                        <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-sm">
+                            Al-Ikhlash
+                        </span>
+                    </h1>
+                    <p class="mt-3 text-sm sm:text-base text-stone-200/90 font-medium leading-relaxed max-w-lg">
+                        Pusat Ibadah, Ilmu, dan Pemberdayaan Umat<br />
+                        <span class="text-amber-400 font-bold">Kerten, Laweyan, Surakarta.</span>
+                    </p>
+                </div>
 
-            {{-- Arabic verse ornament --}}
-            <div class="mb-6 max-w-xl mx-auto">
-                <p class="font-amiri text-2xl sm:text-3xl tracking-wide text-amber-300/90 drop-shadow-md">
-                    إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
-                </p>
-                <p class="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-amber-400/80">
-                    QS. At-Taubah : 18
-                </p>
-                <p class="mt-1.5 text-xs sm:text-sm text-amber-100/75 italic leading-relaxed max-w-lg mx-auto font-medium">
-                    "Hanya yang memakmurkan masjid-masjid Allah ialah orang yang beriman kepada Allah & hari kemudian."
-                </p>
-            </div>
+                {{-- 4 Stat Cards Grid --}}
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
+                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                        <div class="flex items-center gap-2 text-amber-400 mb-1">
+                            <i data-lucide="users" class="size-4 shrink-0"></i>
+                            <span class="font-outfit text-base font-black text-white">950+</span>
+                        </div>
+                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Jamaah Aktif</p>
+                    </div>
 
-            {{-- Hijri badge --}}
-            <div class="inline-flex items-center gap-2.5 rounded-full glass-mosque-gold px-4 py-2 text-xs font-semibold text-amber-200 border border-amber-400/40 shadow-lg backdrop-blur-xl mb-7">
-                <span class="relative flex size-2">
-                    <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-                    <span class="relative inline-flex size-2 rounded-full bg-amber-400"></span>
-                </span>
-                <i data-lucide="moon-star" class="size-3.5 text-amber-300"></i>
-                <span>{{ $hijri['day_name'] }}, {{ $hijri['formatted'] }}</span>
-                @if ($holiday)
-                    <span class="border-s border-amber-400/40 ps-2.5 text-amber-300 font-bold">{{ $holiday }}</span>
-                @endif
-            </div>
+                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                        <div class="flex items-center gap-2 text-amber-400 mb-1">
+                            <i data-lucide="book-open" class="size-4 shrink-0"></i>
+                            <span class="font-outfit text-base font-black text-white">12</span>
+                        </div>
+                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Kajian Bulan Ini</p>
+                    </div>
 
-            {{-- Mosque name & tagline --}}
-            <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.12] tracking-tight text-white drop-shadow-xl max-w-3xl mx-auto">
-                {!! nl2br(e(setting('name', config('masjid.name')))) !!}
-            </h1>
-            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-emerald-100/90 sm:text-base lg:text-lg">
-                {{ setting('tagline', config('masjid.tagline')) }}
-                <span class="font-semibold text-amber-300">·&nbsp;{{ config('masjid.village') }}</span>,&nbsp;{{ config('masjid.city') }}.
-            </p>
+                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                        <div class="flex items-center gap-2 text-amber-400 mb-1">
+                            <i data-lucide="heart" class="size-4 shrink-0"></i>
+                            <span class="font-outfit text-base font-black text-white">Rp 18jt+</span>
+                        </div>
+                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Donasi Bulan Ini</p>
+                    </div>
 
-            {{-- CTA buttons --}}
-            <div class="mt-9 flex flex-wrap justify-center items-center gap-3">
-                @foreach (config('masjid.hero_actions') as $action)
-                    <a href="{{ route($action['route']) }}" wire:navigate
-                       class="inline-flex items-center gap-2.5 rounded-2xl px-6 py-3.5 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 active:scale-95
-                              {{ ($action['primary'] ?? false)
-                                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 shadow-xl shadow-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/45 hover:brightness-110 border border-amber-300/50'
-                                  : 'glass text-white hover:bg-white/20 hover:border-amber-400/40 shadow-lg' }}">
-                        <i data-lucide="{{ $action['icon'] }}" class="size-5 {{ ($action['primary'] ?? false) ? 'text-slate-950' : 'text-amber-300' }}"></i>
-                        <span>{{ $action['label'] }}</span>
-                    </a>
-                @endforeach
-            </div>
-
-            {{-- Live indicator --}}
-            @if ($live && $live->status === 'live')
-                <a href="{{ route('live') }}" wire:navigate class="mt-5 inline-flex items-center gap-3 rounded-full border border-rose-500/50 bg-rose-950/60 px-5 py-2.5 text-sm font-bold text-white shadow-xl backdrop-blur-xl hover:bg-rose-900/80 transition-all">
-                    <span class="relative flex size-2.5">
-                        <span class="absolute inline-flex size-full animate-ping rounded-full bg-rose-400"></span>
-                        <span class="relative inline-flex size-2.5 rounded-full bg-rose-500"></span>
-                    </span>
-                    SEDANG LIVE · {{ Str::limit($live->title, 38) }}
-                </a>
-            @endif
-        </div>
-
-        {{-- ═══ PRAYER TIME FLOATING BAR — pinned to hero bottom ═══ --}}
-        <div class="absolute bottom-0 inset-x-0 z-20 overflow-hidden w-full max-w-full">
-            {{-- Running text strip --}}
-            @if ($running->isNotEmpty())
-                <div class="border-t border-amber-400/20 bg-slate-950/85 py-2.5 backdrop-blur-xl overflow-hidden w-full max-w-full">
-                    <div class="marquee text-sm text-emerald-100/90 font-medium px-4">
-                        @for ($i = 0; $i < 2; $i++)
-                            <div aria-hidden="{{ $i ? 'true' : 'false' }}">
-                                @foreach ($running as $text)
-                                    <span class="flex items-center gap-3 whitespace-nowrap">
-                                        <i data-lucide="sparkles" class="size-4 text-amber-400"></i>
-                                        <span>{{ $text }}</span>
-                                    </span>
-                                @endforeach
-                            </div>
-                        @endfor
+                    <div class="rounded-2xl border border-white/15 bg-stone-950/60 p-3.5 backdrop-blur-md hover:border-amber-500/40 transition-colors shadow-lg">
+                        <div class="flex items-center gap-2 text-amber-400 mb-1">
+                            <i data-lucide="user-check" class="size-4 shrink-0"></i>
+                            <span class="font-outfit text-base font-black text-white">25</span>
+                        </div>
+                        <p class="text-[0.68rem] text-stone-300 font-medium leading-none">Relawan Aktif</p>
                     </div>
                 </div>
-            @endif
 
-            {{-- Prayer time floating panel --}}
-            <div class="border-t border-amber-700/30 bg-stone-950/92 backdrop-blur-2xl overflow-hidden w-full max-w-full">
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col gap-0 sm:flex-row sm:items-stretch sm:divide-x sm:divide-white/10">
+                {{-- Action Pill Buttons Row --}}
+                <div class="flex flex-wrap items-center gap-2 pt-2">
+                    <a href="{{ route('donasi') }}" wire:navigate
+                       class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-5 py-2.5 text-xs sm:text-sm font-extrabold text-stone-950 shadow-xl shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all">
+                        <i data-lucide="hand-heart" class="size-4"></i>
+                        <span>Donasi Sekarang</span>
+                    </a>
 
-                        {{-- Countdown block --}}
-                        <div class="flex items-center gap-5 py-4 sm:pe-8 sm:min-w-[18rem]">
-                            <div x-data="countdown({{ $prayer['seconds_left'] }})" class="flex items-center gap-1.5">
-                                {{-- H --}}
-                                <div class="text-center">
-                                    <span class="font-outfit text-3xl font-extrabold tabular-nums text-white" x-text="parts.h"></span>
-                                    <p class="text-[0.6rem] font-bold uppercase tracking-widest text-amber-400/60">Jam</p>
-                                </div>
-                                <span class="font-outfit text-2xl font-light text-white/40 mb-3">:</span>
-                                {{-- M --}}
-                                <div class="text-center">
-                                    <span class="font-outfit text-3xl font-extrabold tabular-nums text-white" x-text="parts.m"></span>
-                                    <p class="text-[0.6rem] font-bold uppercase tracking-widest text-amber-400/60">Menit</p>
-                                </div>
-                                <span class="font-outfit text-2xl font-light text-white/40 mb-3">:</span>
-                                {{-- S --}}
-                                <div class="text-center">
-                                    <span class="font-outfit text-3xl font-extrabold tabular-nums text-amber-400" x-text="parts.s"></span>
-                                    <p class="text-[0.6rem] font-bold uppercase tracking-widest text-amber-400/60">Detik</p>
-                                </div>
-                            </div>
-                            <div class="border-s border-amber-700/30 ps-5">
-                                <p class="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-amber-400/70">Menuju Adzan</p>
-                                <p class="mt-0.5 text-xl font-extrabold text-white font-jakarta leading-none">{{ $prayer['next_label'] }}</p>
-                                <p class="mt-0.5 text-xs font-semibold text-amber-300">Pukul {{ $prayer['next_time']->format('H:i') }} WIB</p>
-                            </div>
+                    <a href="{{ route('kajian') }}" wire:navigate
+                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                        <i data-lucide="book-open" class="size-4 text-amber-400"></i>
+                        <span>Jadwal Kajian</span>
+                    </a>
+
+                    <a href="{{ route('live') }}" wire:navigate
+                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                        <i data-lucide="radio" class="size-4 text-amber-400"></i>
+                        <span>Live Streaming</span>
+                    </a>
+
+                    <a href="{{ route('imam') }}" wire:navigate
+                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                        <i data-lucide="user-check" class="size-4 text-amber-400"></i>
+                        <span>Jadwal Imam</span>
+                    </a>
+
+                    <a href="{{ route('kiblat') }}" wire:navigate
+                       class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-950/60 px-4 py-2.5 text-xs sm:text-sm font-bold text-white backdrop-blur hover:bg-stone-900/80 hover:border-amber-400/50 transition-all">
+                        <i data-lucide="compass" class="size-4 text-amber-400"></i>
+                        <span>Arah Kiblat</span>
+                    </a>
+                </div>
+
+                {{-- Floating Live Kajian Card (Matching Bottom Left Box in Reference) --}}
+                <div class="rounded-2xl border border-amber-500/30 bg-stone-950/75 p-4 backdrop-blur-xl shadow-2xl max-w-sm space-y-2 mt-4">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-500/20 border border-rose-500/30 px-2.5 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-rose-400">
+                            <span class="size-1.5 rounded-full bg-rose-500 animate-ping"></span>
+                            Live Kajian
+                        </span>
+                        <span class="inline-flex items-center gap-1 text-[0.65rem] font-bold text-emerald-400">
+                            <span class="size-1.5 rounded-full bg-emerald-400"></span> 150 Jamaah Online
+                        </span>
+                    </div>
+                    <div>
+                        <p class="font-extrabold text-sm text-white font-jakarta">Kitab Riyadhus Shalihin</p>
+                        <p class="text-xs text-stone-300 font-medium mt-0.5 flex items-center gap-1">
+                            <i data-lucide="user" class="size-3 text-amber-400"></i> Ust. Abu Hurairah, Lc.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {{-- ═══ PRAYER TIME FLOATING BAR — EXACT MATCH BOTTOM BAR ═══ --}}
+        <div class="relative z-20 w-full border-t border-amber-500/20 bg-stone-950/90 backdrop-blur-2xl py-3 shadow-2xl">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+
+                    {{-- Left Date Card --}}
+                    <div class="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-4 py-2.5 text-xs text-white shrink-0 w-full lg:w-auto">
+                        <div class="grid size-9 place-items-center rounded-xl bg-amber-500/20 text-amber-400">
+                            <i data-lucide="calendar" class="size-4"></i>
                         </div>
-
-                        {{-- 5 waktu sholat --}}
-                        <div class="flex flex-1 items-center justify-between gap-0 overflow-x-auto py-4 sm:divide-x sm:divide-amber-700/20 sm:px-6 scrollbar-none">
-                            @foreach ($prayer['times'] as $key => $time)
-                                @php $isActive = $prayer['current'] === $key; @endphp
-                                <div class="prayer-pill flex-1 min-w-[4rem] {{ $isActive ? 'data-[state=active]' : '' }}"
-                                     data-state="{{ $isActive ? 'active' : '' }}">
-                                    <span class="text-[0.65rem] font-bold uppercase tracking-wider {{ $isActive ? 'text-amber-300' : 'text-stone-400/70' }}">
-                                        {{ \App\Services\PrayerTimeService::PRAYERS[$key] }}
-                                    </span>
-                                    <span class="font-outfit text-base font-extrabold tabular-nums {{ $isActive ? 'text-white' : ($time->isPast() ? 'text-white/40' : 'text-white/90') }}">
-                                        {{ $time->format('H:i') }}
-                                    </span>
-                                    {{-- mini progress bar --}}
-                                    <div class="h-1 w-full overflow-hidden rounded-full {{ $isActive ? 'bg-emerald-500/30' : 'bg-white/10' }}">
-                                        @if ($isActive)
-                                            <div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-amber-400 transition-all duration-1000"
-                                                 style="width: {{ $prayer['progress'] }}%"></div>
-                                        @elseif ($time->isPast())
-                                            <div class="h-full w-full rounded-full bg-white/20"></div>
-                                        @endif
-                                    </div>
-                                    @if ($isActive)
-                                        <span class="text-[0.58rem] font-bold text-emerald-300 uppercase tracking-wider">Sekarang</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        {{-- Iqomah info + link jadwal --}}
-                        <div class="flex flex-row items-center justify-between sm:flex-col sm:justify-center gap-2 py-2.5 sm:py-4 border-t border-white/10 sm:border-t-0 sm:ps-6 sm:min-w-[9.5rem] w-full sm:w-auto">
-                            @if ($prayer['in_iqomah'])
-                                <div class="flex items-center gap-1.5 text-amber-300 text-xs font-bold">
-                                    <i data-lucide="bell-ring" class="size-3.5 animate-pulse"></i>
-                                    <span>Iqomah {{ $prayer['iqomah_at']->format('H:i') }}</span>
-                                </div>
-                            @else
-                                <div class="text-[0.7rem] sm:text-xs text-stone-400/80 font-medium flex items-center gap-1">
-                                    <i data-lucide="globe" class="size-3 inline text-amber-400/80"></i>
-                                    <span>Waktu WIB (Kemenag)</span>
-                                </div>
-                            @endif
-                            <a href="{{ route('jadwal') }}" wire:navigate
-                               class="inline-flex items-center gap-1 rounded-full bg-amber-400/15 px-2.5 py-1 text-[0.7rem] sm:text-xs font-bold text-amber-300 hover:bg-amber-400/25 transition-all">
-                                <i data-lucide="calendar-days" class="size-3"></i>
-                                <span>Jadwal Bulanan</span>
-                                <i data-lucide="chevron-right" class="size-3 ms-0.5"></i>
-                            </a>
+                        <div>
+                            <p class="font-bold text-amber-300 font-jakarta">{{ $hijri['day_name'] }}, {{ $hijri['formatted'] }}</p>
+                            <p class="text-[0.7rem] text-stone-300 font-medium">{{ tanggal_id(now()) }} M</p>
                         </div>
                     </div>
+
+                    {{-- Prayer Times Columns --}}
+                    <div class="flex flex-1 items-center justify-between gap-2 overflow-x-auto w-full py-1 scrollbar-none px-2">
+                        @foreach ($prayer['times'] as $key => $time)
+                            @php $isActive = $prayer['current'] === $key; @endphp
+                            <div class="flex-1 min-w-[5.5rem] rounded-xl px-3 py-2 text-center transition-all {{ $isActive ? 'bg-amber-500/20 border border-amber-500/40 shadow-lg' : 'bg-transparent' }}">
+                                <p class="text-[0.65rem] font-extrabold uppercase tracking-wider {{ $isActive ? 'text-amber-300' : 'text-stone-400' }}">
+                                    {{ \App\Services\PrayerTimeService::PRAYERS[$key] }}
+                                </p>
+                                <p class="font-outfit text-base font-extrabold tabular-nums {{ $isActive ? 'text-white' : 'text-stone-200' }}">
+                                    {{ $time->format('H:i') }}
+                                </p>
+                                @if ($isActive)
+                                    <p class="text-[0.58rem] font-bold text-amber-400 uppercase tracking-tight mt-0.5">Sedang Berlangsung</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Right Countdown Box with Circular/Gauge Indicator --}}
+                    <div x-data="countdown({{ $prayer['seconds_left'] }})" class="flex items-center gap-3 rounded-2xl bg-amber-500/15 border border-amber-500/30 px-4 py-2 shrink-0 w-full lg:w-auto justify-between lg:justify-start">
+                        <div>
+                            <p class="text-[0.65rem] font-bold uppercase tracking-wider text-amber-400/80">Menuju {{ $prayer['next_label'] }}</p>
+                            <p class="font-outfit text-base font-extrabold tabular-nums text-white" x-text="formatted"></p>
+                            <p class="text-[0.68rem] text-stone-300 font-medium" x-text="subtext"></p>
+                        </div>
+                        <div class="relative size-10 grid place-items-center rounded-full bg-stone-900 border border-amber-400/40 text-amber-400">
+                            <i data-lucide="clock" class="size-5 animate-pulse"></i>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
