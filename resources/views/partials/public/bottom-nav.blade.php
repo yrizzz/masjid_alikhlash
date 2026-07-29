@@ -7,11 +7,11 @@
                 $active = request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*');
             @endphp
             <a href="{{ route($target) }}" wire:navigate
-               class="flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium transition-colors {{ $active ? 'text-primary' : 'text-muted-foreground' }}">
+               class="flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium transition-colors {{ $active ? 'text-amber-500 dark:text-amber-400' : 'text-muted-foreground' }}">
                 <span class="relative">
                     <i data-lucide="{{ $item['icon'] }}" class="size-[1.35rem]"></i>
                     @if ($active)
-                        <span class="absolute -top-2.5 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-primary"></span>
+                        <span class="absolute -top-2.5 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-amber-500"></span>
                     @endif
                 </span>
                 {{ $item['label'] }}

@@ -65,9 +65,9 @@
     <script>
         function triggerHeroAnimations() {
             document.querySelectorAll('.hero-animate').forEach(function (el) {
-                el.style.animation = 'none';
-                el.offsetHeight; // reflow
-                el.style.animation = '';
+                el.classList.remove('hero-animate');
+                void el.offsetWidth; // force reflow
+                el.classList.add('hero-animate');
             });
         }
 
