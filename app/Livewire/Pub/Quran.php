@@ -11,6 +11,7 @@ class Quran extends Component
     public int $surah = 1;
     public string $search = '';
     public bool $showTranslation = true;
+    public bool $showLatin = true;
     public bool $showTafsir = false;
     public ?int $noteAyah = null;
     public string $noteText = '';

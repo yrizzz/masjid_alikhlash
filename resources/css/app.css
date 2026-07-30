@@ -1587,18 +1587,28 @@ html[data-layout-fluid="true"] .main-content-container {
 /* Teks Arab Al-Quran & Bismillah. */
 .quran-arabic {
     font-family: 'Amiri', 'Traditional Arabic', serif;
-    font-size: 2rem;
-    line-height: 2.4;
     direction: rtl;
     text-align: right;
+    word-spacing: 0.15em;
 }
+
+.quran-arabic-sm { font-size: 1.5rem; line-height: 2.2; }
+.quran-arabic-md { font-size: 2.1rem; line-height: 2.4; }
+.quran-arabic-lg { font-size: 2.7rem; line-height: 2.6; }
+.quran-arabic-xl { font-size: 3.3rem; line-height: 2.8; }
 
 .bismillah-text {
     font-family: 'Amiri', serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     direction: rtl;
     color: #f59e0b;
 }
+
+.verse-playing-glow {
+    box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+    border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
 
 /* Kompas kiblat. */
 .qibla-dial {
