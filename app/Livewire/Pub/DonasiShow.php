@@ -21,6 +21,7 @@ class DonasiShow extends Component
     public ?int $channelId = null;
 
     public ?Donation $created = null;
+    public int $donorsPerPage = 10;
 
     public function mount(Campaign $campaign): void
     {
@@ -34,6 +35,11 @@ class DonasiShow extends Component
         }
 
         $this->channelId = PaymentChannel::active()->value('id');
+    }
+
+    public function loadMoreDonors(): void
+    {
+        $this->donorsPerPage += 10;
     }
 
     public function pick(int $value): void
@@ -74,13 +80,18 @@ class DonasiShow extends Component
     public function render()
     {
         $presets = array_filter(array_map('intval', explode(',', (string) setting('donation_presets', '20000,50000,100000,250000,500000'))));
+        $allDonations = $this->campaign->donations()->paid()->latest('paid_at');
+        $totalDonorsCount = (clone $allDonations)->count();
+        $donations = (clone $allDonations)->take($this->donorsPerPage)->get();
 
         return view('livewire.pub.donasi-show', [
-            'donations' => $this->campaign->donations()->paid()->latest('paid_at')->take(20)->get(),
-            'channels'  => PaymentChannel::active()->get(),
-            'presets'   => $presets ?: [20000, 50000, 100000, 250000, 500000],
-            'updates'   => $this->campaign->updates,
-            'others'    => Campaign::active()->where('id', '!=', $this->campaign->id)->take(3)->get(),
+            'donations'        => $donations,
+            'totalDonorsCount' => $totalDonorsCount,
+            'hasMoreDonors'    => $totalDonorsCount > $this->donorsPerPage,
+            'channels'         => PaymentChannel::active()->get(),
+            'presets'          => $presets ?: [20000, 50000, 100000, 250000, 500000],
+            'updates'          => $this->campaign->updates,
+            'others'           => Campaign::active()->where('id', '!=', $this->campaign->id)->take(3)->get(),
         ])->layout('components.layouts.public', [
             'title'       => $this->campaign->title,
             'description' => $this->campaign->excerpt,

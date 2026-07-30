@@ -55,7 +55,7 @@
                         <div>
                             <p class="mb-2 text-sm font-medium">Accent color</p>
                             <div class="flex flex-wrap gap-2.5">
-                                @foreach (['blue' => '#2563eb','violet' => '#7c3aed','green' => '#16a34a','rose' => '#e11d48','orange' => '#f97316','amber' => '#f59e0b','teal' => '#14b8a6'] as $n => $hex)
+                                @foreach (['brown' => '#78350f', 'blue' => '#2563eb','violet' => '#7c3aed','green' => '#16a34a','rose' => '#e11d48','orange' => '#f97316','amber' => '#f59e0b','teal' => '#14b8a6'] as $n => $hex)
                                     <button @click="$store.ui.setAccent('{{ $n }}')" :class="$store.ui.accent === '{{ $n }}' ? 'ring-2 ring-primary ring-offset-2 ring-offset-card' : ''" class="grid size-9 place-items-center rounded-full" style="background: {{ $hex }}">
                                         <i data-lucide="check" class="size-4 text-white" x-show="$store.ui.accent === '{{ $n }}'"></i>
                                     </button>

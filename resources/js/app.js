@@ -182,7 +182,7 @@ const registerUIStore = () => {
         theme: LS.get('ak_theme', 'system'),
         direction: LS.get('ak_dir', 'ltr'),
         layout: LS.get('ak_layout', 'vertical'),
-        accent: LS.get('ak_accent', 'blue'),
+        accent: LS.get('ak_accent', 'orange'),
         radius: LS.get('ak_radius', 'lg'),
         sidebarCollapsed: LS.get('ak_sb_collapsed', false),
         navbarFixed: LS.get('ak_navbar_fixed', true),
@@ -221,6 +221,7 @@ const registerUIStore = () => {
             html.setAttribute('dir', this.direction);
             html.dataset.accent = this.accent;
             const accMap = {
+                brown: '24 83% 31%',
                 blue: '221 83% 53%',
                 violet: '262 83% 58%',
                 green: '142 71% 45%',

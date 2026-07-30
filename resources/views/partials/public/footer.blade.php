@@ -54,7 +54,17 @@
                         @foreach ($socials as $name => $url)
                             <a href="{{ $url }}" target="_blank" rel="noopener" title="{{ ucfirst($name) }}"
                                class="grid size-10 place-items-center rounded-xl border border-amber-700/30 bg-card text-muted-foreground transition-all hover:border-amber-400/40 hover:bg-amber-500/10 hover:text-amber-500 hover:scale-105">
-                                <i data-lucide="{{ $name === 'tiktok' ? 'music' : $name }}" class="size-4.5"></i>
+                                @if ($name === 'facebook')
+                                    <x-icons.facebook class="size-4.5" />
+                                @elseif ($name === 'instagram')
+                                    <x-icons.instagram class="size-4.5" />
+                                @elseif ($name === 'youtube')
+                                    <x-icons.youtube class="size-4.5" />
+                                @elseif ($name === 'tiktok')
+                                    <x-icons.tiktok class="size-4.5" />
+                                @else
+                                    <i data-lucide="{{ $name }}" class="size-4.5"></i>
+                                @endif
                             </a>
                         @endforeach
                     </div>

@@ -71,6 +71,18 @@
                         @empty
                             <p class="p-8 text-center text-sm text-muted-foreground">Belum ada donasi masuk. Jadilah donatur pertama untuk campaign ini.</p>
                         @endforelse
+
+                        @if ($hasMoreDonors)
+                            <div class="p-4 text-center border-t border-border/60">
+                                <button wire:click="loadMoreDonors" wire:loading.attr="disabled"
+                                        class="inline-flex items-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-2.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-all cursor-pointer">
+                                    <span wire:loading.remove wire:target="loadMoreDonors" class="inline-flex items-center gap-1.5">
+                                        <i data-lucide="chevron-down" class="size-4"></i> Muat Lebih Banyak Donatur ({{ $donations->count() }}/{{ $totalDonorsCount }})
+                                    </span>
+                                    <span wire:loading wire:target="loadMoreDonors">Memuat data donatur...</span>
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </section>
             </article>

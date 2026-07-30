@@ -116,6 +116,7 @@
 }
 
 /* --- Accent color presets (swap --primary + --ring + --sidebar-primary at runtime) --- */
+[data-accent='brown']  { --primary: 24 83% 31%;  --ring: 24 83% 31%;  --sidebar-primary: 24 83% 31%;  --primary-foreground: 0 0% 100%; }
 [data-accent='blue']   { --primary: 221 83% 53%; --ring: 221 83% 53%; --sidebar-primary: 221 83% 53%; }
 [data-accent='violet'] { --primary: 262 83% 58%; --ring: 262 83% 58%; --sidebar-primary: 262 83% 58%; }
 [data-accent='green']  { --primary: 142 71% 45%; --ring: 142 71% 45%; --sidebar-primary: 142 71% 45%; --primary-foreground: 0 0% 100%; }
@@ -137,13 +138,13 @@
 
 /* Main sidebar is STAY DARK (#0f172a) by default in both Light & Dark modes */
 aside.main-sidebar {
-    background-color: #0f172a !important;
-    color: #e2e8f0 !important;
-    --sidebar: 222 32% 11%;
-    --sidebar-foreground: 220 14% 75%;
-    --sidebar-muted: 220 10% 46%;
-    --sidebar-border: 222 24% 18%;
-    --sidebar-accent: 222 26% 16%;
+    background-color: #1c1917 !important;
+    color: #e7e5e4 !important;
+    --sidebar: 24 10% 10%;
+    --sidebar-foreground: 24 10% 75%;
+    --sidebar-muted: 24 10% 46%;
+    --sidebar-border: 24 10% 18%;
+    --sidebar-accent: 24 10% 16%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-primary: var(--primary);
 }
@@ -156,12 +157,12 @@ aside.customizer-drawer {
 }
 
 html[data-sidebar-color='dark'] aside.main-sidebar {
-    background-color: #0f172a !important;
+    background-color: #1c1917 !important;
     background-image: none !important;
-    color: #e2e8f0 !important;
-    --sidebar-foreground: 215 20.2% 65.1%;
-    --sidebar-muted: 215 16.3% 46.9%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
+    color: #e7e5e4 !important;
+    --sidebar-foreground: 24 10% 65%;
+    --sidebar-muted: 24 10% 47%;
+    --sidebar-accent: 24 10% 18%;
 }
 html[data-sidebar-color='light'] aside.main-sidebar {
     background-color: #ffffff !important;
@@ -349,7 +350,7 @@ header[data-navbar-color='light'] {
 
 html[data-navbar-color='dark'] header,
 header[data-navbar-color='dark'] {
-    background-color: #0f172a !important;
+    background-color: #1c1917 !important;
     background-image: none !important;
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -1156,26 +1157,51 @@ nav.is-searching .nav-sublist {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* Card Animation Selectors */
-html[data-card-animation="fade-up"] .ak-card,
-html[data-card-animation="fade-down"] .ak-card,
-html[data-card-animation="fade-in"] .ak-card,
-html[data-card-animation="zoom-in"] .ak-card {
-    opacity: 0;
+/* Universal Card Animation Selectors across all pages */
+.ak-card,
+.bg-card,
+.card,
+.animate-card {
+    animation: ak-card-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-html[data-card-animation="fade-up"] .animate-cards .ak-card {
+html[data-card-animation="fade-up"] .ak-card,
+html[data-card-animation="fade-up"] .bg-card,
+html[data-card-animation="fade-up"] .card,
+html[data-card-animation="fade-up"] .animate-card {
     animation: ak-card-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-html[data-card-animation="fade-down"] .animate-cards .ak-card {
+
+html[data-card-animation="fade-down"] .ak-card,
+html[data-card-animation="fade-down"] .bg-card,
+html[data-card-animation="fade-down"] .card,
+html[data-card-animation="fade-down"] .animate-card {
     animation: ak-card-fade-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-html[data-card-animation="fade-in"] .animate-cards .ak-card {
+
+html[data-card-animation="fade-in"] .ak-card,
+html[data-card-animation="fade-in"] .bg-card,
+html[data-card-animation="fade-in"] .card,
+html[data-card-animation="fade-in"] .animate-card {
     animation: ak-card-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-html[data-card-animation="zoom-in"] .animate-cards .ak-card {
+
+html[data-card-animation="zoom-in"] .ak-card,
+html[data-card-animation="zoom-in"] .bg-card,
+html[data-card-animation="zoom-in"] .card,
+html[data-card-animation="zoom-in"] .animate-card {
     animation: ak-card-zoom-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Staggered card animation delays inside grid layouts */
+.grid > .ak-card:nth-child(1), .grid > .bg-card:nth-child(1), .grid > a.bg-card:nth-child(1), .grid > .card:nth-child(1) { animation-delay: 40ms; }
+.grid > .ak-card:nth-child(2), .grid > .bg-card:nth-child(2), .grid > a.bg-card:nth-child(2), .grid > .card:nth-child(2) { animation-delay: 80ms; }
+.grid > .ak-card:nth-child(3), .grid > .bg-card:nth-child(3), .grid > a.bg-card:nth-child(3), .grid > .card:nth-child(3) { animation-delay: 120ms; }
+.grid > .ak-card:nth-child(4), .grid > .bg-card:nth-child(4), .grid > a.bg-card:nth-child(4), .grid > .card:nth-child(4) { animation-delay: 160ms; }
+.grid > .ak-card:nth-child(5), .grid > .bg-card:nth-child(5), .grid > a.bg-card:nth-child(5), .grid > .card:nth-child(5) { animation-delay: 200ms; }
+.grid > .ak-card:nth-child(6), .grid > .bg-card:nth-child(6), .grid > a.bg-card:nth-child(6), .grid > .card:nth-child(6) { animation-delay: 240ms; }
+.grid > .ak-card:nth-child(7), .grid > .bg-card:nth-child(7), .grid > a.bg-card:nth-child(7), .grid > .card:nth-child(7) { animation-delay: 280ms; }
+.grid > .ak-card:nth-child(8), .grid > .bg-card:nth-child(8), .grid > a.bg-card:nth-child(8), .grid > .card:nth-child(8) { animation-delay: 320ms; }
 
 /* Auto Component Skeleton Loading styles */
 .livewire-loading .ak-card {

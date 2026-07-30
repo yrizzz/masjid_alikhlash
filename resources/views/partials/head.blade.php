@@ -27,10 +27,11 @@
             d.classList.toggle('dark', dark);
             d.setAttribute('dir', get('ak_dir', 'ltr'));
 
-            var accent = get('ak_accent', 'blue');
+            var accent = get('ak_accent', 'orange');
             d.dataset.accent = accent;
 
             var accMap = {
+                brown: '25 76% 31%',
                 blue: '221 83% 53%',
                 violet: '262 83% 58%',
                 green: '142 71% 45%',

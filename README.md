@@ -1,106 +1,78 @@
-# ⚡ AdminKit
+# 🌙 Masjid Jami' Al-Ikhlash
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/yrizzz/adminkit.svg?style=flat-square&color=4F46E5)](https://packagist.org/packages/yrizzz/adminkit)
-[![Total Downloads](https://img.shields.io/packagist/dt/yrizzz/adminkit.svg?style=flat-square&color=0EA5E9)](https://packagist.org/packages/yrizzz/adminkit)
-[![License](https://img.shields.io/github/license/yrizzz/adminkit?style=flat-square&color=10B981)](LICENSE)
-[![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=flat-square)](https://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square)](https://laravel.com)
-[![Livewire](https://img.shields.io/badge/Livewire-4.x-4E5BA6?style=flat-square)](https://livewire.laravel.com)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Saweria-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://saweria.co/yrizzz)
+> **Sistem Informasi, Ruang Kerja Pengurus & Portal Jamaah Masjid Jami' Al-Ikhlash (Kerten, Laweyan, Surakarta)**
 
-**The Lightweight, Themeable Admin Panel Starter Kit for Laravel 13 & Livewire 4.**
-
-AdminKit provides a fast, elegant, and fully themeable admin foundation built natively with **Laravel 13**, **Livewire 4**, **Tailwind CSS v4**, and **Alpine.js**. No React or Vue build step required.
+Aplikasi web modern berbasis **Laravel 13**, **Livewire 4**, **Tailwind CSS v4**, dan **Alpine.js**.
 
 ---
 
-## 🔥 Why AdminKit?
+## 📖 Tentang Aplikasi
 
-- ⚡ **Lightweight & Blazing Fast**: Powered natively by Blade, Livewire 4, and Alpine.js. Zero heavy JavaScript framework overhead.
-- 🎨 **Modern Design System**: Beautiful, minimal, and accessible UI components right out of the box.
-- 🌓 **Instant Theme Engine**: Light, Dark, and System modes with 7 accent color themes and 5 border radius presets — saved in `localStorage` with **zero FOUC** (flash of unstyled content).
-- 🔄 **Dual Layout & RTL Native**: Switch between **Vertical Sidebar** and **Horizontal Topbar** layouts with built-in LTR & RTL support.
-- ⌨️ **Command Palette (⌘K)**: Built-in keyboard-driven global search palette for quick navigation.
-- 🚀 **Zero-Config Setup**: Spin up a full-featured admin dashboard in less than 30 seconds.
+Aplikasi **Masjid Jami' Al-Ikhlash** dirancang untuk memudahkan pengelolaan kegiatan operasional masjid sekaligus memberikan keterbukaan informasi dan kemudahan layanan bagi jamaah dalam satu platform terpadu.
 
----
+### 🌟 Fitur Utama
 
-## ✨ Features
-
-- 🔐 **Authentication System**: Pre-wired Login, Register, and Password Reset screens with seeded demo user.
-- 🧩 **UI Component Library**: Modular Blade components (`resources/views/components/ui/*`) including Button, Badge, Card, Input, Modal, Alert, Stat Box, Toaster, and Lucide Icons.
-- 📊 **Pre-built Dashboards & Charts**: Interactive Chart.js analytics widgets, stat summary cards, and activity feeds.
-- 📋 **Data Tables & Forms**: Client-side sorting, searching, selection filters, multi-step form wizard, and custom inputs.
-- ⚙️ **Theme Customizer Drawer**: Real-time interactive drawer to preview layout, direction, accent color, and radius adjustments.
+- 🕌 **Portal Publik & Informasi Masjid**: Informasi jadwal sholat otomatis dengan iqomah, jadwal kajian rutin/tematik, pengumuman, dan artikel keislaman.
+- 💰 **Laporan Keuangan Transparan**: Laporan kas masuk/keluar, infak, sedekah, dan zakat tercatat rapi secara realtime.
+- 📇 **Kartu Anggota Digital ber-QR**: Kartu keanggotaan digital jamaah yang praktis dan terintegrasi QR code.
+- 📖 **Pengelolaan TPQ & Kajian**: Manajemen santri TPQ serta penjadwalan kajian keilmuan.
+- 🎨 **Panel Pengurus & Customizer UI**: Ruang kerja pengurus responsif dengan dukungan tema (Light & Dark mode) serta opsi aksen warna (Default: Coklat Warm Earthy).
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ Teknologi yang Digunakan
 
-### Option 1: Create Project via Composer (Recommended)
+- **Framework Backend**: [Laravel 13](https://laravel.com)
+- **Reaktivitas Frontend**: [Livewire 4](https://livewire.laravel.com) & [Alpine.js](https://alpinejs.dev)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Ikon**: [Lucide Icons](https://lucide.dev) & Custom SVG Components
+- **Bundler Asset**: [Vite](https://vitejs.dev)
+
+---
+
+## 🚀 Panduan Pengoperasian
+
+### 1. Clone Repository & Install Dependensi
 
 ```bash
-composer create-project yrizzz/adminkit my-app
-cd my-app
-php artisan serve
-```
+git clone https://github.com/tecmaadv/masjid_alikhlash.git
+cd masjid_alikhlash
 
-### Option 2: Clone Repository
-
-```bash
-git clone https://github.com/yrizzz/adminkit.git my-app
-cd my-app
-
-# Install dependencies
+# Install dependensi PHP & Node.js
 composer install
 npm install
+```
 
-# Setup environment & database
+### 2. Konfigurasi Environment & Database
+
+```bash
 cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
+```
 
-# Build assets & start server
+### 3. Build Asset & Jalankan Server
+
+```bash
+# Compile asset Vite
 npm run build
-php artisan serve
+
+# Jalankan server lokal
+php artisan dev
 ```
 
 ---
 
-## 🔑 Demo Credentials
+## 🔑 Kredensial Demo Pengurus
 
-| Field | Value |
+| Parameter | Nilai |
 | :--- | :--- |
-| **URL** | `http://127.0.0.1:8000` |
-| **Email** | `admin@adminkit.test` |
-| **Password** | `password` |
+| **URL Aplikasi** | `http://localhost:8000` |
+| **Email Pengurus** | `admin@alikhlash.test` |
+| **Kata Sandi** | `password` |
 
 ---
 
-## ☕️ Support & Sponsor
+## 📝 Lisensi
 
-If you find **AdminKit** helpful and want to support its development, you can sponsor via:
-
-- **Saweria**: [https://saweria.co/yrizzz](https://saweria.co/yrizzz)
-- **BNB Chain (BEP-20)**:
-  ```text
-  0xc708ba9b4764deaaf3b24147ff0c5c8ed7ea4c80
-  ```
-
-<a href="https://saweria.co/yrizzz" target="_blank">
-    <img src="https://img.shields.io/badge/Support%20via-Saweria-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee via Saweria">
-</a>
-
-Your support is greatly appreciated! ❤️
-
----
-
-## ⭐️ Show Your Support
-
-If you find **AdminKit** helpful for your projects, please consider giving this repository a **⭐️ Star** on GitHub! It helps the project grow and reach more Laravel developers.
-
----
-
-## 📝 License
-
-AdminKit is open-sourced software licensed under the [MIT license](LICENSE).
+Aplikasi ini dikembangkan untuk kebutuhan operasional **Masjid Jami' Al-Ikhlash Kerten**.

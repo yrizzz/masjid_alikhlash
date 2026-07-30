@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} — {{ setting('name', config('masjid.name')) }}</title>
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#f97316">
 
     <script>
         (function () {
@@ -28,11 +28,11 @@
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased">
     <div class="grid min-h-screen lg:grid-cols-2">
         {{-- Panel identitas masjid --}}
-        <div class="relative hidden overflow-hidden bg-teal-950 p-12 text-white lg:flex lg:flex-col lg:justify-between">
+        <div class="relative hidden overflow-hidden bg-[#1f0d03] p-12 text-white lg:flex lg:flex-col lg:justify-between">
             <div class="pointer-events-none absolute inset-0"
                  style="background:
-                    radial-gradient(55rem 45rem at 110% -10%, hsl(168 70% 35% / .45), transparent 62%),
-                    radial-gradient(40rem 40rem at -15% 115%, hsl(150 60% 30% / .40), transparent 60%);"></div>
+                    radial-gradient(55rem 45rem at 110% -10%, hsl(25 95% 45% / .45), transparent 62%),
+                    radial-gradient(40rem 40rem at -15% 115%, hsl(20 90% 35% / .40), transparent 60%);"></div>
             <div class="pointer-events-none absolute inset-0 opacity-[0.07]"
                  style="background-image:
                     repeating-linear-gradient(45deg, #fff 0 1px, transparent 1px 22px),
@@ -87,7 +87,7 @@
 
             <div class="w-full max-w-sm">
                 <a href="{{ route('home') }}" class="mb-8 flex items-center justify-center gap-2.5 lg:hidden">
-                    <span class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-teal-700 text-white">
+                    <span class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-amber-900 text-white">
                         <i data-lucide="moon-star" class="size-5"></i>
                     </span>
                     <span class="text-lg font-bold">{{ setting('name', config('masjid.name')) }}</span>
