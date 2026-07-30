@@ -12,10 +12,10 @@
     <div class="mx-auto max-w-7xl px-4 py-5 sm:py-16 sm:px-6 lg:px-8">
         {{-- Bismillah Header Accent --}}
         <div class="mb-4 sm:mb-12 text-center border-b border-amber-700/25 pb-3 sm:pb-8">
-            <p class="font-amiri text-2xl font-bold tracking-wide text-amber-400/90 sm:text-3xl">
+            <p class="font-amiri text-2xl font-bold tracking-wide text-amber-600 dark:text-amber-400 sm:text-3xl">
                 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
             </p>
-            <p class="mt-2 text-xs font-medium uppercase tracking-[0.2em] text-amber-500/90 dark:text-amber-400">
+            <p class="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400">
                 Pusat Ibadah, Ilmu, & Pemberdayaan Umat
             </p>
         </div>
