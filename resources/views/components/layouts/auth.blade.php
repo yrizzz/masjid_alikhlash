@@ -11,7 +11,7 @@
 {{-- Standalone, full-screen layout for the Authentication screens.
      No sidebar / navbar — each page paints the whole viewport itself. --}}
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth @if($isDark) dark @endif" dir="{{ $dir }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="@if($isDark) dark @endif" dir="{{ $dir }}">
 <head>
     @include('partials.head', ['title' => $title])
 </head>

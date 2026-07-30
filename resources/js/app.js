@@ -1,6 +1,7 @@
 import { createIcons, icons } from 'lucide';
 import Chart from 'chart.js/auto';
 import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { Jodit } from 'jodit';
 import 'jodit/es2021/jodit.min.css';
 
@@ -29,8 +30,8 @@ const initLenis = () => {
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.5,
+        wheelMultiplier: 1.2,
+        touchMultiplier: 1.8,
         prevent: (node) => {
             return (
                 node.hasAttribute('data-lenis-prevent') ||
