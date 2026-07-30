@@ -158,7 +158,15 @@ Chart.register({
     },
 });
 
-const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
+let renderIconsTimer = null;
+const renderIcons = () => {
+    if (renderIconsTimer) clearTimeout(renderIconsTimer);
+    renderIconsTimer = setTimeout(() => {
+        if (document.querySelector('i[data-lucide]')) {
+            createIcons({ icons, attrs: { 'stroke-width': 2 } });
+        }
+    }, 16);
+};
 window.renderIcons = renderIcons;
 
 /* Tiny localStorage + Cookie sync helper (mirrors the anti-FOUC keys in <head> & server Blade) */
@@ -662,28 +670,17 @@ document.addEventListener('livewire:init', () => {
     });
     Livewire.hook('commit', ({ component, respond, succeed, fail }) => {
         succeed(() => {
-            queueMicrotask(() => renderIcons());
-            setTimeout(() => renderIcons(), 50);
+            renderIcons();
         });
     });
 
     Livewire.hook('request', ({ component, succeed, fail, respond }) => {
-        const requestStart = Date.now();
         if (window.Alpine && Alpine.store('ui') && Alpine.store('ui').pageLoading) {
             if (component.el) component.el.classList.add('livewire-loading');
         }
         return ({ succeed, fail, respond }) => {
-            const elapsed = Date.now() - requestStart;
-            const minComponentDelay = 650; // minimum component loading state time in ms
-            if (elapsed < minComponentDelay) {
-                setTimeout(() => {
-                    if (component.el) component.el.classList.remove('livewire-loading');
-                    renderIcons();
-                }, minComponentDelay - elapsed);
-            } else {
-                if (component.el) component.el.classList.remove('livewire-loading');
-                renderIcons();
-            }
+            if (component.el) component.el.classList.remove('livewire-loading');
+            renderIcons();
         }
     });
 });

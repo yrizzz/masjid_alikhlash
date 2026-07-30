@@ -15,6 +15,7 @@ class Quran extends Component
     public bool $showTafsir = false;
     public ?int $noteAyah = null;
     public string $noteText = '';
+    public int $perPage = 30;
 
     public function mount(?int $surah = null): void
     {
@@ -25,7 +26,18 @@ class Quran extends Component
     public function open(int $number): void
     {
         $this->surah = $number;
+        $this->perPage = 30;
         $this->saveLastRead();
+    }
+
+    public function loadMore(): void
+    {
+        $this->perPage += 30;
+    }
+
+    public function showAll(): void
+    {
+        $this->perPage = 9999;
     }
 
     protected function saveLastRead(int $ayah = 1): void
